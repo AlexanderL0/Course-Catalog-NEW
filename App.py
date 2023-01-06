@@ -29,6 +29,10 @@ app = Flask (__name__)
 def Index():
     return render_template("index.html")
 
+@app.route('/psych')
+def Psych():
+    return render_template("psych.html")
+
 
 
 
