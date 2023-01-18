@@ -32,6 +32,43 @@ def Index():
 @app.route('/psych')
 def Psych():
     return render_template("psych.html")
+  
+@app.route('/comp')
+def Comp():
+    return render_template("comp.html")
+
+@app.route('/econ')
+def Econ():
+    return render_template("econ.html")
+
+@app.route('/stats')
+def Stats():
+    return render_template("stats.html")
+
+@app.route('/multi')
+def Multi():
+    return render_template("multi.html")
+
+@app.route('/bc')
+def Bc():
+    return render_template("bc.html")
+
+@app.route('/APUSH')
+def Apush():
+    return render_template("APUSH.html")
+
+@app.route('/chinese4')
+def Chinese4():
+    return render_template("chinese4.html")
+
+@app.route('/lang')
+def Lang():
+    return render_template("lang.html")
+
+@app.route('/physicsC')
+def PhysicsC():
+    return render_template("physicsC.html")
+
 
 
 
