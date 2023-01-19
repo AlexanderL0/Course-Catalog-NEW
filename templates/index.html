@@ -14,10 +14,11 @@
         <div class="col md-12">
 
             <div class="jumbotron p-3">
-                <h2>Manage  <b>Classes </b> <button type = "button" class="btn btn-success float-end"
+                <h2>Manage Classes <button type = "button" class="btn btn-success float-end"
                 data-bs-toggle="modal" data-bs-target = "#mymodal">Add New Classes</button> </h2>
+                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for classes">
 
-                <table class="table table-hover table-dark">
+                <table id= "myTable" class="table table-hover table-dark">
 
                     <tr>
 
@@ -28,11 +29,11 @@
                         <th>Action</th>
                     </tr>
 
-                    <tr>
+                    <tr id=1>
                         <td>01</td>
                         <td>
                             <a href="http://localhost:5000/psych">
-                                AP Psych
+                                AP Psychology
                             </a>
                         </td>
                         <td>Mrs. Phillips</td>
@@ -45,6 +46,158 @@
                         
                     </tr>
 
+                    <tr id=1>
+                        <td>02</td>
+                        <td>
+                            <a href="http://localhost:5000/econ">
+                                AP Economics
+                            </a>
+                        </td>
+                        <td>Mr. Styers</td>
+                        <td>Social Studies</td>
+
+                        <td>
+                            <a href="" class="btn btn-danger btn-xs" data-bs-toggle="modal" data-bs-target="#modaledit">Edit</a>
+                            <a href="" class="btn btn-warning btn-xs" onclick="return confirm('are you sure you want to delete?')">Delete</a>
+                        </td>
+                        
+                    </tr>
+
+                    <tr id=2>
+                        <td>03</td>
+                        <td>
+                            <a href="http://localhost:5000/multi">
+                                Multi-Variable Calculus & Linear Alg.
+                            </a>
+                        </td>
+                        <td>Mr. Styers</td>
+                        <td>Mathematics</td>
+
+                        <td>
+                            <a href="" class="btn btn-danger btn-xs" data-bs-toggle="modal" data-bs-target="#modaledit">Edit</a>
+                            <a href="" class="btn btn-warning btn-xs" onclick="return confirm('are you sure you want to delete?')">Delete</a>
+                        </td>
+                        
+                    </tr>
+
+                    <tr id=3>
+                        <td>04</td>
+                        <td>
+                            <a href="http://localhost:5000/comp">
+                                Adv Comp Sci Topics - H 
+                            </a>
+                        </td>
+                        <td>Ms. Zietlow</td>
+                        <td>Computer Science</td>
+
+                        <td>
+                            <a href="" class="btn btn-danger btn-xs" data-bs-toggle="modal" data-bs-target="#modaledit">Edit</a>
+                            <a href="" class="btn btn-warning btn-xs" onclick="return confirm('are you sure you want to delete?')">Delete</a>
+                        </td>
+                        
+                    </tr>
+                    
+                    <tr id=2>
+                        <td>05</td>
+                        <td>
+                            <a href="http://localhost:5000/stats">
+                                AP Statistics
+                            </a>
+                        </td>
+                        <td>Mr. Styers</td>
+                        <td>Mathematics</td>
+
+                        <td>
+                            <a href="" class="btn btn-danger btn-xs" data-bs-toggle="modal" data-bs-target="#modaledit">Edit</a>
+                            <a href="" class="btn btn-warning btn-xs" onclick="return confirm('are you sure you want to delete?')">Delete</a>
+                        </td>
+                        
+                    </tr>
+
+                    <tr id=2>
+                        <td>06</td>
+                        <td>
+                            <a href="http://localhost:5000/bc">
+                                AP Calculus BC
+                            </a>
+                        </td>
+                        <td>Mr. Styers</td>
+                        <td>Mathematics</td>
+
+                        <td>
+                            <a href="" class="btn btn-danger btn-xs" data-bs-toggle="modal" data-bs-target="#modaledit">Edit</a>
+                            <a href="" class="btn btn-warning btn-xs" onclick="return confirm('are you sure you want to delete?')">Delete</a>
+                        </td>
+                        
+                    </tr>
+
+                    <tr id=4>
+                        <td>07</td>
+                        <td>
+                            <a href="http://localhost:5000/lang">
+                                AP English Lang/Comp	
+                            </a>
+                        </td>
+                        <td>Mr. Mennenoh</td>
+                        <td>English</td>
+
+                        <td>
+                            <a href="" class="btn btn-danger btn-xs" data-bs-toggle="modal" data-bs-target="#modaledit">Edit</a>
+                            <a href="" class="btn btn-warning btn-xs" onclick="return confirm('are you sure you want to delete?')">Delete</a>
+                        </td>
+                        
+                    </tr>
+
+                    <tr >
+                        <td>08</td>
+                        <td>
+                            <a href="http://localhost:5000/physicsC">
+                                AP Physics - C		
+                            </a>
+                        </td>
+                        <td>Mr. Mennendez</td>
+                        <td>Science</td>
+
+                        <td>
+                            <a href="" class="btn btn-danger btn-xs" data-bs-toggle="modal" data-bs-target="#modaledit">Edit</a>
+                            <a href="" class="btn btn-warning btn-xs" onclick="return confirm('are you sure you want to delete?')">Delete</a>
+                        </td>
+                        
+                    </tr>
+
+                    <tr id=1>
+                        <td>09</td>
+                        <td>
+                            <a href="http://localhost:5000/APUSH">
+                                AP US History			
+                            </a>
+                        </td>
+                        <td>Mr. Swartzloff</td>
+                        <td>Social Studies</td>
+
+                        <td>
+                            <a href="" class="btn btn-danger btn-xs" data-bs-toggle="modal" data-bs-target="#modaledit">Edit</a>
+                            <a href="" class="btn btn-warning btn-xs" onclick="return confirm('are you sure you want to delete?')">Delete</a>
+                        </td>
+                        
+                    </tr>
+
+                    <tr id=6>
+                        <td>10</td>
+                        <td>
+                            <a href="http://localhost:5000/chinese4">
+                                Chinese IV		
+                            </a>
+                        </td>
+                        <td>Ms. Shi</td>
+                        <td>Language</td>
+
+                        <td>
+                            <a href="" class="btn btn-danger btn-xs" data-bs-toggle="modal" data-bs-target="#modaledit">Edit</a>
+                            <a href="" class="btn btn-warning btn-xs" onclick="return confirm('are you sure you want to delete?')">Delete</a>
+                        </td>
+                        
+                    </tr>
 
                     <div>
                         <div id="modaledit" class="modal fade" role="dialog">
@@ -146,5 +299,32 @@
     </div>
 </div>
 
+<script>
+    function myFunction() {
+      // Declare variables
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("myTable");
+      tr = table.getElementsByTagName("tr");
+    
+      // Loop through all table rows, and hide those who don't match the search query
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
+
+    function sort(){
+        
+    }
+    </script>
 
 {% endblock %}
