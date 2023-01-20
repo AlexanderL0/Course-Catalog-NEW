@@ -37,9 +37,9 @@ def Psych():
 def Comp():
     return render_template("comp.html")
 
-@app.route('/econ')
+@app.route('/ClassTemplate')
 def Econ():
-    return render_template("econ.html")
+    return render_template("ClassTemplate.html")
 
 @app.route('/stats')
 def Stats():
