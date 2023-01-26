@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %} Course Catalog {%endblock%}
+
+
+
+{% block body %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="http://localhost:5000/">Back to Catalog</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
+
+<div class="jumbotron p-3">
+    <div class="well text-center">
+
+        <h1>Class Name</h1>
+        <h2>SUBJECT</h2>
+
+    </div>
+</div>
+<div class="well text-center">
+  <p></p>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        Class Description
+      </div>
+      <div class="col">
+        <div class ="col text-center">
+          <div class="w-100"> 
+            <ul class="list-group">
+              <li class="list-group-item">Credits:</li>
+              <li class="list-group-item">Length</li>
+              <li class="list-group-item">Available Grades</li>
+              <li class="list-group-item">Tags</li>
+              <li class="list-group-item">Additional Notes:</li>
+            </ul>
+          </div>
+      
+        </div>
+      </div>
+      <div class="col">
+        <div class="card" style="width: 18rem;">
+          
+          <div class="card-body">
+            <h5 class="card-title">ACADEMY INFO</h5>
+            <p class="card-text">For classes with an academy this will say this class is in [X] Academy</p>
+            <a href="#" class="btn btn-primary">Go to academy page</a>
+          </div>
+        </div>
+        <p></p>
+
+        <div class="card" style="width: 18rem;">
+          
+          <div class="card-body">
+            <h5 class="card-title">Weighting Info</h5>
+            <p class="card-text">This Class is an AP/Honors Class. This class will provide a more challenging curriculm than its standard counterpart</p>
+            <a href="#" class="btn btn-primary">Learn more about AP/Honors classes</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  
+
+</div>
+
+
+
+
+
+
+{% endblock %}
