@@ -30,14 +30,13 @@
 
                     </tr>
 
-<<<<<<< HEAD
                     {% for lstCourse in lstCourse %}
                         <tr>
                             <th>{{ lstCourse['Number'] }}</th>
                             <th>{{ lstCourse['course_id'] }}</th>
                             <th>
                                 <a href="http://localhost:5000/class">
-                                    {{ lstCourse['name'] }}
+                                    <button type="submit" name="submit_class" value="{{lstCourse['Number']}}">{{ lstCourse['name'] }}</button>
                                 </a>
                             </th>
                             <th>{{ lstCourse['subject'] }}</th>
@@ -48,9 +47,7 @@
                             </td>
                         </tr>
                     {% endfor %}
-=======
                     
->>>>>>> 1db9c8b142580613ba6fd5aaee73c141a2714859
 
                     <div>
                         <div id="modaledit" class="modal fade" role="dialog">
@@ -175,5 +172,13 @@
       }
     }
     </script>
+
+<script>
+    function setClass(classNumber) {
+        console.log(classNumber);
+
+
+    }
+</script>
 
 {% endblock %}
