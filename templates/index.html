@@ -36,7 +36,7 @@
                             <th>{{ lstCourse['course_id'] }}</th>
                             <th>
                                 <a href="http://localhost:5000/class">
-                                    {{ lstCourse['name'] }}
+                                    <button type="submit" name="submit_class" value="{{lstCourse['Number']}}">{{ lstCourse['name'] }}</button>
                                 </a>
                             </th>
                             <th>{{ lstCourse['subject'] }}</th>
@@ -172,5 +172,13 @@
       }
     }
     </script>
+
+<script>
+    function setClass(classNumber) {
+        console.log(classNumber);
+
+
+    }
+</script>
 
 {% endblock %}

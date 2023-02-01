@@ -1,5 +1,5 @@
 import sqlite3
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask (__name__)
 
@@ -23,6 +23,12 @@ def Template():
 @app.route('/honors')
 def Honor():
     return render_template("honors.html")
+    classNumber = request.form.get('submit_class')
+    print (classNumber)
+    return render_template("ClassTemplate.html")
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
