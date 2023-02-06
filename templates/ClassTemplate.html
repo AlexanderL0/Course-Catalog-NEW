@@ -12,13 +12,12 @@
       <span class="navbar-toggler-icon"></span>
     </button>
   </nav>
-
+{% for lstCourse in lstCourse %}
+{% if lstCourse['course_id'] == classes %}
 <div class="jumbotron p-3">
     <div class="well text-center">
-
-        <h1>Class Name</h1>
-        <h2>SUBJECT</h2>
-
+        <h1>{{lstCourse['name']}}</h1>
+        <h2>{{lstCourse['subject']}}</h2>
     </div>
 </div>
 <div class="well text-center">
@@ -71,8 +70,8 @@
 
 </div>
 
-
-
+{% endif %}
+{% endfor %}
 
 
 

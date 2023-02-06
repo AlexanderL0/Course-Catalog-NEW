@@ -16,32 +16,32 @@
             <div class="jumbotron p-3">
                 <h2>Manage Classes <button type = "button" class="btn btn-success float-end"
                 data-bs-toggle="modal" data-bs-target = "#mymodal">Add New Classes</button> </h2>
-                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for classes">
-
-                <table id= "myTable" class="table table-hover table-dark">
+                <input size="142" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for classes">
+                    <p></p>
+                <table id= "myTable" class="table  table-dark">
 
                     <tr>
 
-                        <th>Number</th>
+                        <th class="bg-danger">Number</th>
                         <th>ID</th>
-                        <th>Name</th>
+                        <th class="bg-danger">Name</th>
                         <th>Subject</th>
-                        <th>Action</th>
+                        <th class="bg-danger">Action</th>
 
                     </tr>
 
                     {% for lstCourse in lstCourse %}
                         <tr>
-                            <th>{{ lstCourse['Number'] }}</th>
+                            <th class="bg-danger">{{ lstCourse['Number'] }}</th>
                             <th>{{ lstCourse['course_id'] }}</th>
-                            <th>
-                                <a href="http://localhost:5000/class">
-                                    <button type="submit" name="submit_class" value="{{lstCourse['Number']}}">{{ lstCourse['name'] }}</button>
+                            <th class="bg-danger">
+                                <a href="{{url_for('Template', Classes = lstCourse['course_id'])}}">
+                                    {{ lstCourse['name'] }}
                                 </a>
                             </th>
                             <th>{{ lstCourse['subject'] }}</th>
 
-                            <td>
+                            <td class="bg-danger">
                                 <a href="" class="btn btn-danger btn-xs" data-bs-toggle="modal" data-bs-target="#modaledit">Edit</a>
                                 <a href="" class="btn btn-warning btn-xs" onclick="return confirm('are you sure you want to delete?')">Delete</a>
                             </td>

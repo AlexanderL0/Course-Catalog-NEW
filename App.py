@@ -16,16 +16,16 @@ def index():
     conn.close()
     return render_template("index.html", lstCourse=lstCourse)
 
-@app.route('/class')
-def Template():
-    return render_template("ClassTemplate.html")
+@app.route('/<Classes>')
+def Template(Classes):
+    conn = get_db_connection()
+    lstCourse = conn.execute('''select * from Catalog''').fetchall()
+    conn.close()
+    return render_template("ClassTemplate.html", lstCourse=lstCourse, classes = Classes)
 
 @app.route('/honors')
 def Honor():
     return render_template("honors.html")
-    classNumber = request.form.get('submit_class')
-    print (classNumber)
-    return render_template("ClassTemplate.html")
 
 
 
