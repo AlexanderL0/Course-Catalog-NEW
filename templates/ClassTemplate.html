@@ -25,17 +25,32 @@
   <div class="container">
     <div class="row">
       <div class="col">
-        Class Description
+        <div class="card">
+        <div class="container">
+        <h3>Class Description:</h3> 
+        {% if lstCourse['description'] != '' %}
+        <p>{{lstCourse['description']}}</p>
+        {% else %}
+        <p>no course description available</p>
+        {% endif %}
+      </div>
+      </div>
       </div>
       <div class="col">
         <div class ="col text-center">
           <div class="w-100"> 
             <ul class="list-group">
-              <li class="list-group-item">Credits:</li>
-              <li class="list-group-item">Length</li>
-              <li class="list-group-item">Available Grades</li>
-              <li class="list-group-item">Tags</li>
-              <li class="list-group-item">Additional Notes:</li>
+              <li class="list-group-item">Credits: {{lstCourse['credits']}}</li>
+              <li class="list-group-item">Length: {{lstCourse['length']}}</li>
+                {% if lstCourse['grade_lower'] != '' %}
+                <li class="list-group-item">Available Grades: {{lstCourse['grade_lower']}} - {{lstCourse['grade_upper']}} </li>
+                {% else %}
+                <li class="list-group-item">Available Grades: unspecified </li>
+                {% endif %}
+             
+
+              <li class="list-group-item">Tags: {{lstCourse['tags']}}</li>
+              <li class="list-group-item">Enrollment Notes: {{lstCourse['enrollment_notes']}}</li>
             </ul>
           </div>
       

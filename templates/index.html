@@ -35,11 +35,15 @@
                             <th class="bg-danger">{{ lstCourse['Number'] }}</th>
                             <th>{{ lstCourse['course_id'] }}</th>
                             <th class="bg-danger">
-                                <a href="{{url_for('Template', Classes = lstCourse['course_id'])}}">
+                                <a href="{{url_for('Template', Classes = lstCourse['course_id'])}}" class="btn btn-danger btn-xs">
                                     {{ lstCourse['name'] }}
                                 </a>
                             </th>
-                            <th>{{ lstCourse['subject'] }}</th>
+                            {% if lstCourse['subject'] != ' ' %}
+                                <th>{{lstCourse['subject']}}</th>
+                            {% else %}
+                                <th>none</th>
+                            {% endif %}
 
                             <td class="bg-danger">
                                 <a href="" class="btn btn-danger btn-xs" data-bs-toggle="modal" data-bs-target="#modaledit">Edit</a>
