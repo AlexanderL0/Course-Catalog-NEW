@@ -57,25 +57,87 @@
         </div>
       </div>
       <div class="col">
+
+        {% if  lstCourse['course_id'].find("INA") > -1 %}
         <div class="card" style="width: 18rem;">
           
           <div class="card-body">
             <h5 class="card-title">ACADEMY INFO</h5>
-            <p class="card-text">For classes with an academy this will say this class is in [X] Academy</p>
+            <p class="card-text">This class is part of the engineering academy. To learn more about the engineering academy please see the link below.</p>
             <a href="#" class="btn btn-primary">Go to academy page</a>
           <p>{{classNumber}}</p>
           </div>
         </div>
         <p></p>
+        {% endif %}
 
+        {% if  lstCourse['course_id'].find("MED") > -1 %}
+        <div class="card" style="width: 18rem;">
+          
+          <div class="card-body">
+            <h5 class="card-title">ACADEMY INFO</h5>
+            <p class="card-text">This class is part of the medical academy. To learn more about the medical academy please see the link below.</p>
+            <a href="#" class="btn btn-primary">Go to academy page</a>
+          <p>{{classNumber}}</p>
+          </div>
+        </div>
+        <p></p>
+        {% endif %}
+
+        {% if  lstCourse['course_id'] is none %}
+        {% elif  lstCourse['course_id'].find("FNA") > -1 %}
+        <div class="card" style="width: 18rem;">
+          
+          <div class="card-body">
+            <h5 class="card-title">ACADEMY INFO</h5>
+            <p class="card-text">This class is part of the Fine Arts Academy. To learn more about the Fine Arts Academy please see the link below.</p>
+            <a href="#" class="btn btn-primary">Go to academy page</a>
+          <p>{{classNumber}}</p>
+          </div>
+        </div>
+        <p></p>
+        {% endif %}
+
+        {% if  lstCourse['course_id'].find("SST") > -1 %}
+        <div class="card" style="width: 18rem;">
+          
+          <div class="card-body">
+            <h5 class="card-title">ACADEMY INFO</h5>
+            <p class="card-text">This class is part of the Global Academy. To learn more about the Global Academy please see the link below.</p>
+            <a href="#" class="btn btn-primary">Go to academy page</a>
+          <p>{{classNumber}}</p>
+          </div>
+        </div>
+        <p></p>
+        {% endif %}
+
+        {% if  lstCourse['tags'].find("Honors") > -1 %}
         <div class="card" style="width: 18rem;">
           
           <div class="card-body">
             <h5 class="card-title">Grading Info</h5>
-            <p class="card-text">This Class is an AP/Honors Class. This class will provide a more challenging curriculum than its standard counterpart</p>
-            <a href="http://localhost:5000/honors" class="btn btn-primary">Learn more about the HHS Grading System</a>
+            <p class="card-text">This class is an Honors class. This class will provide a curriculum at a faster pace with a more rigourous grading structure than its standard counterpart.</p>
+            <a href="http://localhost:5000/honors" class="btn btn-primary">Learn more about the HHS Grading Scale</a>
           </div>
         </div>
+        {% elif  lstCourse['tags'].find("AP") > -1 %}
+        <div class="card" style="width: 18rem;">
+          
+          <div class="card-body">
+            <h5 class="card-title">Grading Info</h5>
+            <p class="card-text">This class is an AP class. This class will provide a curriculum similar to that of an entry level college course. Upon sucessful completion of the class and a passing grade on the Advanced Placement exam, students can apply for college credit and placement.</p>
+            <a href="http://localhost:5000/honors" class="btn btn-primary">Learn more about AP classes at HHS</a>
+          </div>
+        </div>
+        {% else %}
+        <div class="card" style="width: 18rem;">
+          
+          <div class="card-body">
+            <h5 class="card-title">Grading Info</h5>
+            <a href="http://localhost:5000/honors" class="btn btn-primary">Learn more about class weighting and grading options at HHS</a>
+          </div>
+        </div>
+        {% endif %}
       </div>
     </div>
   </div>
