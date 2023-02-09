@@ -27,6 +27,10 @@ def Template(Classes):
 def Honor():
     return render_template("honors.html")
 
+@app.route('/blended')
+def Blend():
+    return render_template("blended.html")
+
 
 
 

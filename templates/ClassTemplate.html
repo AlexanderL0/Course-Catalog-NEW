@@ -138,7 +138,20 @@
           </div>
         </div>
         {% endif %}
+
+        {% if lstCourse['tags'].find("Blended") > -1 %}
+      <div class="card" style="width: 18rem;">
+          
+        <div class="card-body">
+          <h5 class="card-title">Blended Info</h5>
+          <p class="card-text">This class is offered blended.</p>
+
+          <a href="http://localhost:5000/blended" class="btn btn-primary">Learn more about blended offerings at HHS</a>
+        </div>
       </div>
+      {% endif %}
+      </div>
+      
     </div>
   </div>
   
