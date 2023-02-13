@@ -31,6 +31,10 @@ def Honor():
 def Chin():
     return render_template("chinese4.html")
 
+@app.route('/blended')
+def Blend():
+    return render_template("blended.html")
+
 
 
 
