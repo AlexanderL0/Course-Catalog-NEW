@@ -18,6 +18,18 @@
                 data-bs-toggle="modal" data-bs-target = "#mymodal">Add New Classes</button> </h2>
                 <input size="142" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for classes">
                     <p></p>
+                    <div>
+                        <label for="subject-filter-select">Filter by Subject:</label>
+                        <select id="subject-filter-select">
+                            <option value="all">All</option>
+                            {% for lstCourse in lstCourse %}
+                            {% if lstCourse['subject'] != ' ' %}
+                            <option value="{{lstCourse['subject']}}">{{lstCourse['subject']}}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                      </div>
+                      </div>
                 <table id= "myTable" class="table  table-dark">
 
                     <tr>
@@ -31,18 +43,18 @@
                     </tr>
 
                     {% for lstCourse in lstCourse %}
-                        <tr>
-                            <th class="bg-danger">{{ lstCourse['Number'] }}</th>
-                            <th>{{ lstCourse['course_id'] }}</th>
-                            <th class="bg-danger">
+                        <tr class= "filterDiv {{lstCourse['subject']}}">
+                            <td class="bg-danger">{{ lstCourse['Number'] }}</td>
+                            <td>{{ lstCourse['course_id'] }}</td>
+                            <td class="bg-danger">
                                 <a href="{{url_for('Template', Classes = lstCourse['course_id'])}}" class="btn btn-danger btn-xs">
                                     {{ lstCourse['name'] }}
                                 </a>
-                            </th>
+                            </td>
                             {% if lstCourse['subject'] != ' ' %}
-                                <th>{{lstCourse['subject']}}</th>
+                                <td>{{lstCourse['subject']}}</td>
                             {% else %}
-                                <th>none</th>
+                                <td>none</td>
                             {% endif %}
 
                             <td class="bg-danger">
@@ -163,8 +175,8 @@
       tr = table.getElementsByTagName("tr");
     
       // Loop through all table rows, and hide those who don't match the search query
-      for (i = 1; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("th")[2];
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[2];
         if (td) {
           txtValue = td.textContent || td.innerText;
           if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -173,16 +185,26 @@
             tr[i].style.display = "none";
           }
         }
+       }
+    }
+
+    const subjectFilterSelect = document.getElementById("subject-filter-select");
+    const classTable = document.getElementById("myTable");
+
+    subjectFilterSelect.addEventListener("change", function() {
+    const filterValue = subjectFilterSelect.value;
+
+      for (let i = 1; i < classTable.rows.length; i++) {
+        const subjectCell = classTable.rows[i].cells[3];
+        if (filterValue === "all" || subjectCell.innerHTML === filterValue) {
+          classTable.rows[i].style.display = "";
+        } else {
+          classTable.rows[i].style.display = "none";
+        }
       }
-    }
-    </script>
-
-<script>
-    function setClass(classNumber) {
-        console.log(classNumber);
-
-
-    }
+    });
+    
 </script>
+
 
 {% endblock %}

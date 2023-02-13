@@ -27,6 +27,10 @@ def Template(Classes):
 def Honor():
     return render_template("honors.html")
 
+@app.route('/penis')
+def Chin():
+    return render_template("chinese4.html")
+
 
 
 
