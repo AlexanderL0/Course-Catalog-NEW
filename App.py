@@ -13,8 +13,13 @@ def get_db_connection():
 def index():
     conn = get_db_connection()
     lstCourse = conn.execute('''select * from Catalog''').fetchall()
+    cursor = conn.cursor()
+    cursor.execute("SELECT subject FROM catalog")
+    rows = cursor.fetchall()
+    data = [row[0] for row in rows]
+    data = list(set(data))
     conn.close()
-    return render_template("index.html", lstCourse=lstCourse)
+    return render_template("index.html", lstCourse=lstCourse, data=data)
 
 @app.route('/<Classes>')
 def Template(Classes):
@@ -27,7 +32,7 @@ def Template(Classes):
 def Honor():
     return render_template("honors.html")
 
-@app.route('/penis')
+@app.route('/test')
 def Chin():
     return render_template("chinese4.html")
 

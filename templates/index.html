@@ -18,15 +18,24 @@
                 data-bs-toggle="modal" data-bs-target = "#mymodal">Add New Classes</button> </h2>
                 <input size="142" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for classes">
                     <p></p>
+                    <label for="checkboxContainer">Filter by Subject:</label>
+                    <div id="checkboxContainer">
+                        {% for data in data %}
+                            {% if data != ' ' %}
+                            <input type="checkbox" id="{{data}}" value="{{data}}" checked />
+                            <label for="{{data}}">{{data}}</label>
+                            {% endif %}
+                            {% endfor %}
                     <div>
                         <label for="subject-filter-select">Filter by Subject:</label>
                         <select id="subject-filter-select">
                             <option value="all">All</option>
-                            {% for lstCourse in lstCourse %}
-                            {% if lstCourse['subject'] != ' ' %}
-                            <option value="{{lstCourse['subject']}}">{{lstCourse['subject']}}</option>
+                            {% for data in data %}
+                            {% if data != ' ' %}
+                            <option value="{{data}}">{{data}}</option>
                             {% endif %}
                             {% endfor %}
+                            <option value="none">Other</option>
                         </select>
                       </div>
                       </div>
@@ -204,6 +213,8 @@
       }
     });
     
+    var data = [data];
+
 </script>
 
 
