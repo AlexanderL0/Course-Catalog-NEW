@@ -64,7 +64,7 @@
           <div class="card-body">
             <h5 class="card-title">ACADEMY INFO</h5>
             <p class="card-text">This class is part of the engineering academy. To learn more about the engineering academy please see the link below.</p>
-            <a href="#" class="btn btn-primary">Go to academy page</a>
+            <a href="https://sites.google.com/district158.org/hhsengacademy/home?pli=1" class="btn btn-primary">Go to academy page</a>
           <p>{{classNumber}}</p>
           </div>
         </div>
@@ -147,6 +147,18 @@
           <p class="card-text">This class is offered blended.</p>
 
           <a href="http://localhost:5000/blended" class="btn btn-primary">Learn more about blended offerings at HHS</a>
+        </div>
+      </div>
+      {% endif %}
+
+      {% if lstCourse['tags'].find("Dual") > -1 %}
+      <div class="card" style="width: 18rem;">
+          
+        <div class="card-body">
+          <h5 class="card-title">Dual Credit Info</h5>
+          <p class="card-text">This is a dual credit class</p>
+
+          <a href="https://www.mchenry.edu/dualcredit/index.html" class="btn btn-primary">Learn More about dual enrollment classes at offered through McHenry County College at HHS</a>
         </div>
       </div>
       {% endif %}
