@@ -6,7 +6,6 @@
 {% block title %} Home {%endblock%}
 
 
-
 {% block body %}
 
 <div class="container">
@@ -18,29 +17,23 @@
                 data-bs-toggle="modal" data-bs-target = "#mymodal">Add New Classes</button> </h2>
                 <input size="142" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for classes">
                     <p></p>
-                    <label for="checkboxContainer">Filter by Subject:</label>
-                    <div id="checkboxContainer">
+                      <div>
+                        <button id="toggle-btn">Advanced Search</button>
+                      </div>
+                      <div id="checkboxes" style="display:none">
                         {% for data in data %}
-                            {% if data != ' ' %}
-                            <input type="checkbox" id="{{data}}" value="{{data}}" checked />
-                            <label for="{{data}}">{{data}}</label>
-                            {% endif %}
-                            {% endfor %}
-                    <div>
-                        <label for="subject-filter-select">Filter by Subject:</label>
-                        <select id="subject-filter-select">
-                            <option value="all">All</option>
-                            {% for data in data %}
-                            {% if data != ' ' %}
-                            <option value="{{data}}">{{data}}</option>
-                            {% endif %}
-                            {% endfor %}
-                            <option value="none">Other</option>
-                        </select>
+                        {% if data != ' ' %}
+                        <label>
+                          <input type="checkbox" name="subject" value="{{data}}">{{data}}</input>
+                        </label>
+                        {% endif %}
+                        {% endfor %}
+                        <label>
+                            <input type="checkbox" name="subject" value="none">Other</input>
+                        </label>
                       </div>
-                      </div>
-                <table id= "myTable" class="table  table-dark">
-
+                <table id= "classes-table" class="table  table-dark">
+                    <thead>
                     <tr>
 
                         <th class="bg-danger">Number</th>
@@ -50,7 +43,8 @@
                         <th class="bg-danger">Action</th>
 
                     </tr>
-
+                    </thead>
+                    <tbody>
                     {% for lstCourse in lstCourse %}
                         <tr class= "filterDiv {{lstCourse['subject']}}">
                             <td class="bg-danger">{{ lstCourse['Number'] }}</td>
@@ -61,7 +55,7 @@
                                 </a>
                             </td>
                             {% if lstCourse['subject'] != ' ' %}
-                                <td>{{lstCourse['subject']}}</td>
+                                <td data-value="{{lstCourse['subject']}}">{{lstCourse['subject']}}</td>
                             {% else %}
                                 <td>none</td>
                             {% endif %}
@@ -72,6 +66,7 @@
                             </td>
                         </tr>
                     {% endfor %}
+                </tbody>
                     
 
                     <div>
@@ -180,7 +175,7 @@
       var input, filter, table, tr, td, i, txtValue;
       input = document.getElementById("myInput");
       filter = input.value.toUpperCase();
-      table = document.getElementById("myTable");
+      table = document.getElementById("classes-table");
       tr = table.getElementsByTagName("tr");
     
       // Loop through all table rows, and hide those who don't match the search query
@@ -196,9 +191,9 @@
         }
        }
     }
-
+    /*
     const subjectFilterSelect = document.getElementById("subject-filter-select");
-    const classTable = document.getElementById("myTable");
+    const classTable = document.getElementById("classes-table");
 
     subjectFilterSelect.addEventListener("change", function() {
     const filterValue = subjectFilterSelect.value;
@@ -211,10 +206,53 @@
           classTable.rows[i].style.display = "none";
         }
       }
-    });
+    }); */
     
     var data = [data];
 
+
+
+
+
+
+    ///CHECKBOXES
+
+    const toggleBtn = document.getElementById('toggle-btn');
+      const checkboxes = document.getElementById('checkboxes');
+      const tableBody = document.getElementById('classes-table').getElementsByTagName('tbody')[0];
+
+      toggleBtn.addEventListener('click', () => {
+        if (checkboxes.style.display === 'none') {
+          checkboxes.style.display = 'block';
+        } else {
+          checkboxes.style.display = 'none';
+        }
+      });
+
+      checkboxes.addEventListener('click', () => {
+        const selectedSubjects = [];
+        const subjectCheckboxes = checkboxes.querySelectorAll('input[type="checkbox"]:checked');
+
+        subjectCheckboxes.forEach((checkbox) => {
+          selectedSubjects.push(checkbox.value);
+        });
+
+        if (selectedSubjects.length === 0) {
+          // Show all rows if no subjects are selected
+          Array.from(tableBody.rows).forEach((row) => {
+            row.style.display = '';
+          });
+        } else {
+          Array.from(tableBody.rows).forEach((row) => {
+            const subject = row.cells[3].textContent;
+            if (selectedSubjects.includes(subject)) {
+              row.style.display = '';
+            } else {
+              row.style.display = 'none';
+            }
+          });
+        }
+      });
 </script>
 
 

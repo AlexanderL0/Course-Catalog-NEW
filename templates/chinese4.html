@@ -1,5 +1,7 @@
+<!DOCTYPE html>
 <html>
   <head>
+    <title>School Classes Table</title>
     <style>
       table, th, td {
         border: 1px solid black;
@@ -9,71 +11,96 @@
     </style>
   </head>
   <body>
-    <div id="checkboxContainer">
-      <input type="checkbox" id="value1" value="value1" checked />
-      <label for="value1">Value 1</label>
-      <input type="checkbox" id="value2" value="value2" checked />
-      <label for="value2">Value 2</label>
-      <input type="checkbox" id="value3" value="value3" checked />
-      <label for="value3">Value 3</label>
+    <div>
+      <button id="toggle-btn">Toggle Checkboxes</button>
     </div>
-    <table id="dataTable">
-      <tr>
-        <th>Data</th>
-      </tr>
-      <tr>
-        <td data-value="value1">Data 1</td>
-      </tr>
-      <tr>
-        <td data-value="value2">Data 2</td>
-      </tr>
-      <tr>
-        <td data-value="value3">Data 3</td>
-      </tr>
-      <tr>
-        <td data-value="value1">Data 4</td>
-      </tr>
-      <tr>
-        <td data-value="value2">Data 5</td>
-      </tr>
+
+    <table id="classes-table">
+      <thead>
+        <tr>
+          <th>Class Name</th>
+          <th>Subject</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Class A</td>
+          <td>Math</td>
+        </tr>
+        <tr>
+          <td>Class B</td>
+          <td>English</td>
+        </tr>
+        <tr>
+          <td>Class C</td>
+          <td>Science</td>
+        </tr>
+        <tr>
+          <td>Class D</td>
+          <td>History</td>
+        </tr>
+        <tr>
+          <td>Class E</td>
+          <td>Art</td>
+        </tr>
+      </tbody>
     </table>
 
+    <div id="checkboxes" style="display:none">
+      <label>
+        <input type="checkbox" name="subject" value="math">Math
+      </label>
+      <label>
+        <input type="checkbox" name="subject" value="english">English
+      </label>
+      <label>
+        <input type="checkbox" name="subject" value="science">Science
+      </label>
+      <label>
+        <input type="checkbox" name="subject" value="history">History
+      </label>
+      <label>
+        <input type="checkbox" name="subject" value="art">Art
+      </label>
+    </div>
+
     <script>
-      // Get references to the checkboxes and table
-      var checkboxes = document.querySelectorAll("#checkboxContainer input[type='checkbox']");
-      var table = document.getElementById("dataTable");
+      const toggleBtn = document.getElementById('toggle-btn');
+      const checkboxes = document.getElementById('checkboxes');
+      const tableBody = document.getElementById('classes-table').getElementsByTagName('tbody')[0];
 
-      // Add change listeners to the checkboxes
-      for (var i = 0; i < checkboxes.length; i++) {
-        checkboxes[i].addEventListener("change", filterTable);
-      }
-
-      // Function to filter the table based on checkbox selections
-      function filterTable() {
-        // Get an array of all selected checkbox values
-        var selectedValues = [];
-        for (var i = 0; i < checkboxes.length; i++) {
-          if (checkboxes[i].checked) {
-            selectedValues.push(checkboxes[i].value);
-          }
+      toggleBtn.addEventListener('click', () => {
+        if (checkboxes.style.display === 'none') {
+          checkboxes.style.display = 'block';
+        } else {
+          checkboxes.style.display = 'none';
         }
+      });
 
-        // Loop through all rows in the table
-        for (var i = 1; i < table.rows.length; i++) {
-          var row = table.rows[i];
-          var dataValue = row.cells[0].getAttribute("data-value");
+      checkboxes.addEventListener('click', () => {
+        const selectedSubjects = [];
+        const subjectCheckboxes = checkboxes.querySelectorAll('input[type="checkbox"]:checked');
 
-          // Show or hide the row based on whether its data value is selected
-          if (selectedValues.indexOf(dataValue) === -1) {
-            row.style.display = "none";
-          } else {
-            row.style.display = "";
-          }
+        subjectCheckboxes.forEach((checkbox) => {
+          selectedSubjects.push(checkbox.value);
+        });
+
+        if (selectedSubjects.length === 0) {
+          // Show all rows if no subjects are selected
+          Array.from(tableBody.rows).forEach((row) => {
+            row.style.display = '';
+          });
+        } else {
+          Array.from(tableBody.rows).forEach((row) => {
+            const subject = row.cells[1].textContent.toLowerCase();
+            if (selectedSubjects.includes(subject)) {
+              row.style.display = '';
+            } else {
+              row.style.display = 'none';
+            }
+          });
         }
-      }
-
-      // Filter the table initially
-      filterTable();
+      });
     </script>
   </body>
 </html>
