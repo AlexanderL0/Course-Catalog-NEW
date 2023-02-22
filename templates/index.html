@@ -3,54 +3,103 @@
 
 
 
+
+
+
 {% block title %} Home {%endblock%}
+
 
 
 
 {% block body %}
 
+
 <div class="container">
     <div class="row">
         <div class="col md-12">
 
-            <div class="jumbotron p-3">
-                <h2>Manage Classes <button type = "button" class="btn btn-success float-end"
-                data-bs-toggle="modal" data-bs-target = "#mymodal">Add New Classes</button> </h2>
-                <input size="142" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for classes">
-                    <p></p>
-                    <label for="checkboxContainer">Filter by Subject:</label>
-                    <div id="checkboxContainer">
-                        {% for data in data %}
-                            {% if data != ' ' %}
-                            <input type="checkbox" id="{{data}}" value="{{data}}" checked />
-                            <label for="{{data}}">{{data}}</label>
-                            {% endif %}
-                            {% endfor %}
-                    <div>
-                        <label for="subject-filter-select">Filter by Subject:</label>
-                        <select id="subject-filter-select">
-                            <option value="all">All</option>
-                            {% for data in data %}
-                            {% if data != ' ' %}
-                            <option value="{{data}}">{{data}}</option>
-                            {% endif %}
-                            {% endfor %}
-                            <option value="none">Other</option>
-                        </select>
-                      </div>
-                      </div>
-                <table id= "myTable" class="table  table-dark">
 
+            <div class="jumbotron p-3">
+                <!-- Add new classes button (useless rn) -->
+                <h2>Searych Classes  </h2>
+
+
+                <div>
+                  {% for grade in grade %}
+                    <p>{{grade}}</p>
+                  {% endfor %}
+                </div>
+
+
+                <!-- Displays the search bar -->
+                <input size="167" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for classes">
+                    <p></p>
+
+
+                      <!-- Displays the advanced search button -->
+                      <div>
+                        <button id="toggle-btn">Search by Subject</button>
+                      </div>
+                      <!-- Creates the checkboxes -->
+                      <div id="checkboxes" style="display:none">
+                        {% for data in data %}
+                        {% if data != ' ' %}
+                        <input type="checkbox" id="{{data}}" class="subject-checkbox" value="{{data}}">
+                        <label for="{{data}}">{{data}}</label>
+                        {% endif %}
+                        {% endfor %}
+                        <input type="checkbox" id="none" class="subject-checkbox" value="none">
+                        <label for="none">Other</label>
+                      </div>
+
+
+                      <!-- Displays the advanced search button -->
+                      <div>
+                        <button id="gradetoggle-btn">Search by Grade Level</button>
+                      </div>
+
+
+                      <select id="subject-filter-select">
+                        <option value="all">All</option>
+                        <option value="9">9th</option>
+                        <option value="10">10th</option>
+                        <option value="11">11th</option>
+                        <option value="12">12th</option>
+                      </select>
+                     
+                      <!-- Creates the checkboxes -->
+                      <div id="gradeCheckboxes" style="display:none"></div>
+                        <input type="checkbox" id="9" class="grade-checkbox" value="9">
+                        <label for="9">9th Grade</label>
+                        <input type="checkbox" id="10" class="grade-checkbox" value="10">
+                        <label for="10">10th Grade</label>
+                        <input type="checkbox" id="11" class="grade-checkbox" value="11">
+                        <label for="11">11th Grade</label>
+                        <input type="checkbox" id="12" class="grade-checkbox" value="12">
+                        <label for="12">12th Grade</label>
+                    </div>
+                     
+
+
+
+
+                <!-- Create's table -->
+                <table id= "classes-table" class="table  table-dark">
+                    <thead>
                     <tr>
+
 
                         <th class="bg-danger">Number</th>
                         <th>ID</th>
                         <th class="bg-danger">Name</th>
                         <th>Subject</th>
-                        <th class="bg-danger">Action</th>
+                        <th class="bg-danger">Grades Available</th>
+
 
                     </tr>
-
+                    </thead>
+                    <tbody>
+                      <!-- Imports data from database -->
                     {% for lstCourse in lstCourse %}
                         <tr class= "filterDiv {{lstCourse['subject']}}">
                             <td class="bg-danger">{{ lstCourse['Number'] }}</td>
@@ -61,128 +110,57 @@
                                 </a>
                             </td>
                             {% if lstCourse['subject'] != ' ' %}
-                                <td>{{lstCourse['subject']}}</td>
+                                <td data-value="{{lstCourse['subject']}}">{{lstCourse['subject']}}</td>
                             {% else %}
                                 <td>none</td>
                             {% endif %}
+                            {% if lstCourse['grade_lower'] == '' %}
+                            <td class="bg-danger" data-value="unspecified">unspecified</td>
+                            {% elif lstCourse['grade_lower'] == 9 and lstCourse['grade_upper'] == 9  %}
+                            <td class="bg-danger" data-value="9">9</td>
+                            {% elif lstCourse['grade_lower'] == 9 and lstCourse['grade_upper'] == 10  %}
+                            <td class="bg-danger" data-value="9,10">9,10</td>
+                            {% elif lstCourse['grade_lower'] == 9 and lstCourse['grade_upper'] == 11  %}
+                            <td class="bg-danger" data-value="9,10,11">9,10,11</td>
+                            {% elif lstCourse['grade_lower'] == 9 and lstCourse['grade_upper'] == 12  %}
+                            <td class="bg-danger" data-value="9,10,11,12">9,10,11,12</td>
+                            {% elif lstCourse['grade_lower'] == 10 and lstCourse['grade_upper'] == 10  %}
+                            <td class="bg-danger" data-value="10">10</td>
+                            {% elif lstCourse['grade_lower'] == 10 and lstCourse['grade_upper'] == 11  %}
+                            <td class="bg-danger" data-value="10,11">10,11</td>
+                            {% elif lstCourse['grade_lower'] == 10 and lstCourse['grade_upper'] == 12  %}
+                            <td class="bg-danger" data-value="10,11,12">10,11,12</td>
+                            {% elif lstCourse['grade_lower'] == 11 and lstCourse['grade_upper'] == 11  %}
+                            <td class="bg-danger" data-value="11">11</td>
+                            {% elif lstCourse['grade_lower'] == 11 and lstCourse['grade_upper'] == 12  %}
+                            <td class="bg-danger" data-value="11,12">11,12</td>
+                            {% elif lstCourse['grade_lower'] == 12 and lstCourse['grade_upper'] == 12  %}
+                            <td class="bg-danger" data-value="12">12</td>
+                            {% endif %}
 
-                            <td class="bg-danger">
-                                <a href="" class="btn btn-danger btn-xs" data-bs-toggle="modal" data-bs-target="#modaledit">Edit</a>
-                                <a href="" class="btn btn-warning btn-xs" onclick="return confirm('are you sure you want to delete?')">Delete</a>
-                            </td>
+
+
+
                         </tr>
                     {% endfor %}
-                    
-
-                    <div>
-                        <div id="modaledit" class="modal fade" role="dialog">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-        
-                                        <h4 class="modal-title">Update Class Info</h4>
-                                    </div>
-                                    <div class = "modal-body">
-        
-                                        <form action="" method ="POST">
-                                            
-                                            <div class="form-group">
-        
-                                                <label>ID:</label>
-                                                <input type="text" class="form-control" name="name" required="1">
-                                            
-                                            </div>
-        
-                                            <div class="form-group">
-        
-                                                <label>Name:</label>
-                                                <input type="text" class="form-control" name="teacher" required="1">
-                                            </div>
-        
-                                            <div class="form-group">
-        
-                                                <label>Subject:</label>
-                                                <input type="text" class="form-control" name="subject" required="1">
-                                            </div>
-        
-                                            <div class="form-group">
-                                                <button class="btn btn-primary" type="submit">Save Edits</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-        
-                    </div>
-
-                    
+                </tbody>
                 </table>
             </div>
-
-            <div>
-                <div id="mymodal" class="modal fade" role="dialog">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-
-                                <h4 class="modal-title">Add a Class</h4>
-                            </div>
-                            <div class = "modal-body">
-
-                                <form action="" method ="POST">
-                                    
-                                    <div class="form-group">
-
-                                        <label>ID:</label>
-                                        <input type="text" class="form-control" name="name" required="1">
-                                    
-                                    </div>
-
-                                    <div class="form-group">
-
-                                        <label>Name:</label>
-                                        <input type="text" class="form-control" name="teacher" required="1">
-                                    </div>
-
-                                    <div class="form-group">
-
-                                        <label>Subject:</label>
-                                        <input type="text" class="form-control" name="subject" required="1">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <button class="btn btn-primary" type="submit">Add Class</button>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
         </div>
-
-
-
     </div>
 </div>
 
+
 <script>
+  //search bar code
     function myFunction() {
       // Declare variables
       var input, filter, table, tr, td, i, txtValue;
       input = document.getElementById("myInput");
       filter = input.value.toUpperCase();
-      table = document.getElementById("myTable");
+      table = document.getElementById("classes-table");
       tr = table.getElementsByTagName("tr");
-    
+   
       // Loop through all table rows, and hide those who don't match the search query
       for (i = 0; i < tr.length; i++) {
         td = tr[i].getElementsByTagName("td")[2];
@@ -196,12 +174,132 @@
         }
        }
     }
+   
+    //list of class subjects, no repeats
+    var data = [data];
 
+
+    const toggleBtn = document.getElementById('toggle-btn');
+      const checkboxes = document.getElementById('checkboxes');
+      const tableBody = document.getElementById('classes-table').getElementsByTagName('tbody')[0];
+    toggleBtn.addEventListener('click', () => {
+        if (checkboxes.style.display === 'none') {
+          checkboxes.style.display = 'block';
+        } else {
+          checkboxes.style.display = 'none';
+        }
+      });
+
+
+
+
+      const gradetoggleBtn = document.getElementById('gradetoggle-btn');
+      const gcheckboxes = document.getElementById('gradeCheckboxes');
+      const gradetableBody = document.getElementById('classes-table').getElementsByTagName('tbody')[0];
+      gradetoggleBtn.addEventListener('click', () => {
+        if (gcheckboxes.style.display === 'none') {
+          gcheckboxes.style.display = 'block';
+        } else {
+          gcheckboxes.style.display = 'none';
+        }
+      });
+/*
+    ///Checkboxes code
+    const toggleBtn = document.getElementById('toggle-btn');
+      const checkboxes = document.getElementById('checkboxes');
+      const tableBody = document.getElementById('classes-table').getElementsByTagName('tbody')[0];
+
+
+      toggleBtn.addEventListener('click', () => {
+        if (checkboxes.style.display === 'none') {
+          checkboxes.style.display = 'block';
+        } else {
+          checkboxes.style.display = 'none';
+        }
+      });
+
+
+      checkboxes.addEventListener('click', () => {
+        const selectedSubjects = [];
+        const subjectCheckboxes = checkboxes.querySelectorAll('input[type="checkbox"]:checked');
+
+
+        subjectCheckboxes.forEach((checkbox) => {
+          selectedSubjects.push(checkbox.value);
+        });
+
+
+        if (selectedSubjects.length === 0) {
+          // Show all rows if no subjects are selected
+          Array.from(tableBody.rows).forEach((row) => {
+            row.style.display = '';
+          });
+        } else {
+          Array.from(tableBody.rows).forEach((row) => {
+            const subject = row.cells[3].textContent;
+            if (selectedSubjects.includes(subject)) {
+              row.style.display = '';
+            } else {
+              row.style.display = 'none';
+            }
+          });
+        }
+      });
+     
+
+
+      //GRADE LEVEL Checkboxes code
+    const gradetoggleBtn = document.getElementById('gradetoggle-btn');
+      const gcheckboxes = document.getElementById('gradeCheckboxes');
+      const gradetableBody = document.getElementById('classes-table').getElementsByTagName('tbody')[0];
+
+
+      gradetoggleBtn.addEventListener('click', () => {
+        if (gcheckboxes.style.display === 'none') {
+          gcheckboxes.style.display = 'block';
+        } else {
+          gcheckboxes.style.display = 'none';
+        }
+      });
+
+
+      gcheckboxes.addEventListener('click', () => {
+        const selectedGrades = [];
+        const gradeCheckboxes = gcheckboxes.querySelectorAll('input[type="checkbox"]:checked');
+
+
+        gradeCheckboxes.forEach((checkbox) => {
+          selectedGrades.push(checkbox.value);
+        });
+
+
+        if (selectedGrades.length === 0) {
+          // Show all rows if no subjects are selected
+          Array.from(tableBody.rows).forEach((row) => {
+            row.style.display = '';
+          });
+        } else {
+          Array.from(tableBody.rows).forEach((row) => {
+            const grade = row.cells[4].textContent;
+            if (grade.includes(selectedGrades)) {
+              row.style.display = '';
+            } else {
+              row.style.display = 'none';
+            }
+          });
+        }
+      });
+*/
+
+
+/*
     const subjectFilterSelect = document.getElementById("subject-filter-select");
-    const classTable = document.getElementById("myTable");
+    const classTable = document.getElementById("classes-table");
+
 
     subjectFilterSelect.addEventListener("change", function() {
     const filterValue = subjectFilterSelect.value;
+
 
       for (let i = 1; i < classTable.rows.length; i++) {
         const subjectCell = classTable.rows[i].cells[3];
@@ -212,10 +310,65 @@
         }
       }
     });
-    
-    var data = [data];
+*/
+let selectedSubjects = [];
+let selectedGrades = [];
 
+
+document.querySelectorAll('.subject-checkbox').forEach(checkbox => {
+  checkbox.addEventListener('change', (event) => {
+    if (event.target.checked) {
+      selectedSubjects.push(event.target.value);
+    } else {
+      const index = selectedSubjects.indexOf(event.target.value);
+      if (index !== -1) {
+        selectedSubjects.splice(index, 1);
+      }
+    }
+    filterTable();
+  });
+});
+
+
+document.querySelectorAll('.grade-checkbox').forEach(checkbox => {
+  checkbox.addEventListener('change', (event) => {
+    if (event.target.checked) {
+      selectedGrades.push(event.target.value);
+    } else {
+      const index = selectedGrades.indexOf(event.target.value);
+      if (index !== -1) {
+        selectedGrades.splice(index, 1);
+      }
+    }
+    filterTable();
+  });
+});
+
+
+function filterTable() {
+  const table = document.getElementById('classes-table');
+  const rows = table.getElementsByTagName('tr');
+  for (let i = 1; i < rows.length; i++) {
+    const classRow = rows[i];
+    const classSubject = classRow.getElementsByTagName('td')[3].innerText;
+    const classGrade = classRow.getElementsByTagName('td')[4].innerText.toLowerCase();
+    let showRow = true;
+    if (selectedSubjects.length > 0 && !selectedSubjects.includes(classSubject)) {
+      showRow = false;
+    }
+    if (selectedGrades.length > 0 && !classGrade.includes(selectedGrades)) {
+      showRow = false;
+    }
+    classRow.style.display = showRow ? '' : 'none';
+  }
+}
+
+
+     
 </script>
 
 
+
+
 {% endblock %}
+

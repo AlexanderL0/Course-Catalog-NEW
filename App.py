@@ -20,7 +20,7 @@ def index():
     data = list(set(data))
     conn.close()
     return render_template("index.html", lstCourse=lstCourse, data=data)
-
+ 
 @app.route('/<Classes>')
 def Template(Classes):
     conn = get_db_connection()
