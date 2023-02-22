@@ -1,0 +1,108 @@
+<!-- Testing page we use to test code-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>School Classes Table</title>
+    <style>
+      table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <button id="toggle-btn">Toggle Checkboxes</button>
+    </div>
+
+    <table id="classes-table">
+      <thead>
+        <tr>
+          <th>Class Name</th>
+          <th>Subject</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Class A</td>
+          <td>Math</td>
+        </tr>
+        <tr>
+          <td>Class B</td>
+          <td>English</td>
+        </tr>
+        <tr>
+          <td>Class C</td>
+          <td>Science</td>
+        </tr>
+        <tr>
+          <td>Class D</td>
+          <td>History</td>
+        </tr>
+        <tr>
+          <td>Class E</td>
+          <td>Art</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div id="checkboxes" style="display:none">
+      <label>
+        <input type="checkbox" name="subject" value="math">Math
+      </label>
+      <label>
+        <input type="checkbox" name="subject" value="english">English
+      </label>
+      <label>
+        <input type="checkbox" name="subject" value="science">Science
+      </label>
+      <label>
+        <input type="checkbox" name="subject" value="history">History
+      </label>
+      <label>
+        <input type="checkbox" name="subject" value="art">Art
+      </label>
+    </div>
+
+    <script>
+      const toggleBtn = document.getElementById('toggle-btn');
+      const checkboxes = document.getElementById('checkboxes');
+      const tableBody = document.getElementById('classes-table').getElementsByTagName('tbody')[0];
+
+      toggleBtn.addEventListener('click', () => {
+        if (checkboxes.style.display === 'none') {
+          checkboxes.style.display = 'block';
+        } else {
+          checkboxes.style.display = 'none';
+        }
+      });
+
+      checkboxes.addEventListener('click', () => {
+        const selectedSubjects = [];
+        const subjectCheckboxes = checkboxes.querySelectorAll('input[type="checkbox"]:checked');
+
+        subjectCheckboxes.forEach((checkbox) => {
+          selectedSubjects.push(checkbox.value);
+        });
+
+        if (selectedSubjects.length === 0) {
+          // Show all rows if no subjects are selected
+          Array.from(tableBody.rows).forEach((row) => {
+            row.style.display = '';
+          });
+        } else {
+          Array.from(tableBody.rows).forEach((row) => {
+            const subject = row.cells[1].textContent.toLowerCase();
+            if (selectedSubjects.includes(subject)) {
+              row.style.display = '';
+            } else {
+              row.style.display = 'none';
+            }
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

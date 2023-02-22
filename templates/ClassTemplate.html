@@ -5,13 +5,14 @@
 
 
 {% block body %}
-
+<!-- Nav bar to get back to home page-->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="http://localhost:5000/">Back to Catalog</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-  </nav>
+</nav>
+<!-- Imports data from database and displays it on html file based on the course_id-->
 {% for lstCourse in lstCourse %}
 {% if lstCourse['course_id'] == classes %}
 <div class="jumbotron p-3">
@@ -57,7 +58,7 @@
         </div>
       </div>
       <div class="col">
-
+        <!-- ALEXANDER EXPLAIN THIS CODE-->
         {% if  lstCourse['course_id'].find("INA") > -1 %}
         <div class="card" style="width: 18rem;">
           
@@ -117,7 +118,7 @@
           <div class="card-body">
             <h5 class="card-title">Grading Info</h5>
             <p class="card-text">This class is an Honors class. This class will provide a curriculum at a faster pace with a more rigourous grading structure than its standard counterpart.</p>
-            <a href="http://localhost:5000/honors" class="btn btn-primary">Learn more about the HHS Grading Scale</a>
+            <a href="http://localhost:5000/grading" class="btn btn-primary">Learn more about the HHS Grading Scale</a>
           </div>
         </div>
         {% elif  lstCourse['tags'].find("AP") > -1 %}
@@ -126,7 +127,7 @@
           <div class="card-body">
             <h5 class="card-title">Grading Info</h5>
             <p class="card-text">This class is an AP class. This class will provide a curriculum similar to that of an entry level college course. Upon sucessful completion of the class and a passing grade on the Advanced Placement exam, students can apply for college credit and placement.</p>
-            <a href="http://localhost:5000/honors" class="btn btn-primary">Learn more about AP classes at HHS</a>
+            <a href="http://localhost:5000/grading" class="btn btn-primary">Learn more about AP classes at HHS</a>
           </div>
         </div>
         {% else %}
@@ -134,7 +135,7 @@
           
           <div class="card-body">
             <h5 class="card-title">Grading Info</h5>
-            <a href="http://localhost:5000/honors" class="btn btn-primary">Learn more about class weighting and grading options at HHS</a>
+            <a href="http://localhost:5000/grading" class="btn btn-primary">Learn more about class weighting and grading options at HHS</a>
           </div>
         </div>
         {% endif %}
