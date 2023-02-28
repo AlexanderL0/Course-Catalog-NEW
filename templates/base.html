@@ -4,11 +4,13 @@
 <head>
 
     <link href="{{url_for('static', filename = 'bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
-
+    
     <meta charset="UTF-8">
     <title>{% block title %} {% endblock %} </title>
-</head>    
-<body style="background-color:lavenderblush">
+
+</head>
+<body style="background: linear-gradient(to bottom, #cf4141, #000000);"></body>
+
 
     {% block body %} {% endblock %}
 <script type ="text/javascript" src="{{url_for('static', filename='jquery/dist/jquery.min.js')}}"></script>
