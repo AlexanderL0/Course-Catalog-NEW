@@ -58,7 +58,7 @@
                         <button id="gradetoggle-btn">Search by Grade Level</button>
                       </div>
 
-
+                      <!--
                       <select id="subject-filter-select">
                         <option value="all">All</option>
                         <option value="9">9th</option>
@@ -66,7 +66,8 @@
                         <option value="11">11th</option>
                         <option value="12">12th</option>
                       </select>
-                     
+                     -->
+                    
                       <!-- Creates the checkboxes -->
                       <div id="gradeCheckboxes" style="display:none"></div>
                         <input type="checkbox" id="9" class="grade-checkbox" value="9">
@@ -105,7 +106,7 @@
                             <td class="bg-secondary">{{ lstCourse['Number'] }}</td>
                             <td>{{ lstCourse['course_id'] }}</td>
                             <td class="bg-secondary">
-                                <a href="{{url_for('Template', Classes = lstCourse['course_id'])}}" class="btn btn-muted text-primary btn-xs">
+                                <a href="{{url_for('Template', Classes = lstCourse['course_id'])}}" class="btn btn-muted btn-xs">
                                     {{ lstCourse['name'] }}
                                 </a>
                             </td>
@@ -363,8 +364,6 @@ function filterTable() {
   }
 }
 
-
-     
 </script>
 
 

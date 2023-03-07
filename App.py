@@ -29,6 +29,10 @@ def Template(Classes):
     conn.close()
     return render_template("ClassTemplate.html", lstCourse=lstCourse, classes = Classes)
 
+@app.route('/plan')
+def Plan():
+    return render_template("planner.html")
+
 @app.route('/grading')
 def Grade():
     return render_template("grading.html")
@@ -41,6 +45,17 @@ def Test():
 def Blend():
     return render_template("blended.html")
 
+@app.route('/submit-rating', methods=['POST'])
+def submit_rating():
+    course_id = request.form['course_id']
+    rating = request.form['rating']
+    conn = get_db_connection()
+    c = conn.cursor()
+    c.execute('INSERT INTO ratings (course_id, rating) VALUES (?, ?)', (course_id, rating))
+    conn.commit()
+    conn.close()
+
+    return 'Rating submitted successfully'
 
 
 
