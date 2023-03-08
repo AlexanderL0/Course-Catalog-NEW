@@ -1,24 +1,56 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Bootstrap Dropdown Menu Example</title>
+    <title>Bootstrap Table with Dropdown Example</title>
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   </head>
   <body>
 
     <div class="container">
-      <h2>Bootstrap Dropdown Menu Example</h2>
+      <h2>Bootstrap Table with Dropdown Example</h2>
       
-      <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Menu
-        <span class="caret"></span></button>
-        <ul class="dropdown-menu">
-          <li><a href="#">Menu Item 1</a></li>
-          <li><a href="#">Menu Item 2</a></li>
-          <li><a href="#">Menu Item 3</a></li>
-        </ul>
-      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Dropdown Column</th>
+            <th>Value Column 1</th>
+            <th>Value Column 2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Menu
+                <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Option 1</a></li>
+                  <li><a href="#">Option 2</a></li>
+                  <li><a href="#">Option 3</a></li>
+                </ul>
+              </div>
+            </td>
+            <td>Value 1</td>
+            <td>Value 2</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Menu
+                <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Option 1</a></li>
+                  <li><a href="#">Option 2</a></li>
+                  <li><a href="#">Option 3</a></li>
+                </ul>
+              </div>
+            </td>
+            <td>Value 3</td>
+            <td>Value 4</td>
+          </tr>
+        </tbody>
+      </table>
       
     </div>
 
