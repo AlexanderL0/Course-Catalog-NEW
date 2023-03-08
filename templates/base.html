@@ -2,14 +2,16 @@
 <html lang="en">
 
 <head>
+        <link href="{{url_for('static', filename = 'bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
+   
+    
 
-    <link href="{{url_for('static', filename = 'bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
     
     <meta charset="UTF-8">
     <title>{% block title %} {% endblock %} </title>
 
 </head>
-<body style="background-color: #9d152d"></body>
+<body style="background-color: #f9f9f9"></body>
 
 
     {% block body %} {% endblock %}

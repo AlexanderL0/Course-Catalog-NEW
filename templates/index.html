@@ -103,40 +103,52 @@
                       <!-- Imports data from database -->
                     {% for lstCourse in lstCourse %}
                         <tr class= "filterDiv {{lstCourse['subject']}}">
-                            <td class="bg-secondary">{{ lstCourse['Number'] }}</td>
-                            <td>{{ lstCourse['course_id'] }}</td>
-                            <td class="bg-secondary">
+                            <td class="bg-danger">
+
+                              <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Menu
+                                <span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                  <li><a href="#">Option 1</a></li>
+                                  <li><a href="#">Option 2</a></li>
+                                  <li><a href="#">Option 3</a></li>
+                                </ul>
+                              </div>
+
+                            </td>
+                            <td class="bg-secondary">{{ lstCourse['course_id'] }}</td>
+                            <td class="bg-danger">
                                 <a href="{{url_for('Template', Classes = lstCourse['course_id'])}}" class="btn btn-muted btn-xs">
                                     {{ lstCourse['name'] }}
                                 </a>
                             </td>
                             {% if lstCourse['subject'] != ' ' %}
-                                <td data-value="{{lstCourse['subject']}}">{{lstCourse['subject']}}</td>
+                                <td class="bg-secondary" data-value="{{lstCourse['subject']}}">{{lstCourse['subject']}}</td>
                             {% else %}
-                                <td>none</td>
+                                <td class="bg-secondary">none</td>
                             {% endif %}
                             {% if lstCourse['grade_lower'] == '' %}
-                            <td class="bg-secondary" data-value="unspecified">unspecified</td>
+                            <td class="bg-danger" data-value="unspecified">unspecified</td>
                             {% elif lstCourse['grade_lower'] == 9 and lstCourse['grade_upper'] == 9  %}
-                            <td class="bg-secondary" data-value="9">9</td>
+                            <td class="bg-danger" data-value="9">9</td>
                             {% elif lstCourse['grade_lower'] == 9 and lstCourse['grade_upper'] == 10  %}
-                            <td class="bg-secondary" data-value="9,10">9,10</td>
+                            <td class="bg-danger" data-value="9,10">9,10</td>
                             {% elif lstCourse['grade_lower'] == 9 and lstCourse['grade_upper'] == 11  %}
-                            <td class="bg-secondary" data-value="9,10,11">9,10,11</td>
+                            <td class="bg-danger" data-value="9,10,11">9,10,11</td>
                             {% elif lstCourse['grade_lower'] == 9 and lstCourse['grade_upper'] == 12  %}
-                            <td class="bg-secondary" data-value="9,10,11,12">9,10,11,12</td>
+                            <td class="bg-danger" data-value="9,10,11,12">9,10,11,12</td>
                             {% elif lstCourse['grade_lower'] == 10 and lstCourse['grade_upper'] == 10  %}
-                            <td class="bg-secondary" data-value="10">10</td>
+                            <td class="bg-danger" data-value="10">10</td>
                             {% elif lstCourse['grade_lower'] == 10 and lstCourse['grade_upper'] == 11  %}
-                            <td class="bg-secondary" data-value="10,11">10,11</td>
+                            <td class="bg-danger" data-value="10,11">10,11</td>
                             {% elif lstCourse['grade_lower'] == 10 and lstCourse['grade_upper'] == 12  %}
-                            <td class="bg-secondary" data-value="10,11,12">10,11,12</td>
+                            <td class="bg-danger" data-value="10,11,12">10,11,12</td>
                             {% elif lstCourse['grade_lower'] == 11 and lstCourse['grade_upper'] == 11  %}
-                            <td class="bg-secondary" data-value="11">11</td>
+                            <td class="bg-danger" data-value="11">11</td>
                             {% elif lstCourse['grade_lower'] == 11 and lstCourse['grade_upper'] == 12  %}
-                            <td class="bg-secondary" data-value="11,12">11,12</td>
+                            <td class="bg-danger" data-value="11,12">11,12</td>
                             {% elif lstCourse['grade_lower'] == 12 and lstCourse['grade_upper'] == 12  %}
-                            <td class="bg-secondary" data-value="12">12</td>
+                            <td class="bg-#9d152d" data-value="12">12</td>
                             {% endif %}
 
 
@@ -151,7 +163,8 @@
     </div>
 </div>
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script>
   //search bar code
     function myFunction() {
