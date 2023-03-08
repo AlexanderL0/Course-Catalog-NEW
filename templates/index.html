@@ -103,7 +103,19 @@
                       <!-- Imports data from database -->
                     {% for lstCourse in lstCourse %}
                         <tr class= "filterDiv {{lstCourse['subject']}}">
-                            <td class="bg-secondary">{{ lstCourse['Number'] }}</td>
+                            <td class="bg-secondary"> 
+
+                              <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Menu
+                                <span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                  <li><a href="#">Menu Item 1</a></li>
+                                  <li><a href="#">Menu Item 2</a></li>
+                                  <li><a href="#">Menu Item 3</a></li>
+                                </ul>
+                              </div>
+
+                            </td>
                             <td>{{ lstCourse['course_id'] }}</td>
                             <td class="bg-secondary">
                                 <a href="{{url_for('Template', Classes = lstCourse['course_id'])}}" class="btn btn-muted btn-xs">
