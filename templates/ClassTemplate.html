@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
-
-{% block title %} Course Catalog {%endblock%}
+{% block title %}
+{% for lstCourse in lstCourse %}
+{% if lstCourse['course_id'] == classes %}
+{{lstCourse['name']}} 
+{% endif %}
+{% endfor %}
+{%endblock%}
 
 
 
