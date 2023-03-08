@@ -45,6 +45,18 @@ def Test():
 def Blend():
     return render_template("blended.html")
 
+@app.route('/submit-rating', methods=['POST'])
+def submit_rating():
+    course_id = request.form['course_id']
+    rating = request.form['rating']
+    conn = get_db_connection()
+    c = conn.cursor()
+    c.execute('INSERT INTO ratings (course_id, rating) VALUES (?, ?)', (course_id, rating))
+    conn.commit()
+    conn.close()
+
+    return 'Rating submitted successfully'
+
 
 
 if __name__ == "__main__":
