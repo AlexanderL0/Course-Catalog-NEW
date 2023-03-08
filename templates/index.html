@@ -1,18 +1,31 @@
 {% extends 'base.html' %}
-{% include 'header.html' %}
 
 
 
 
 
 
-{% block title %} Home {%endblock%}
+{% block title %} Course Catalog {%endblock%}
 
 
 
 
 {% block body %}
 
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="http://localhost:5000/plan">Favorites</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+</nav>
+
+<div class="jumbotron p-3">
+  <div class="well text-center">
+
+      <h1>HHS Course Catalog</h1>
+
+  </div>
+</div>
 
 <div class="container">
     <div class="row">
@@ -69,7 +82,7 @@
                      -->
                     
                       <!-- Creates the checkboxes -->
-                      <div id="gradeCheckboxes" style="display:none"></div>
+                      <div id="gradeCheckboxes" ></div>
                         <input type="checkbox" id="9" class="grade-checkbox" value="9">
                         <label for="9">9th Grade</label>
                         <input type="checkbox" id="10" class="grade-checkbox" value="10">
@@ -148,7 +161,7 @@
                             {% elif lstCourse['grade_lower'] == 11 and lstCourse['grade_upper'] == 12  %}
                             <td class="bg-danger" data-value="11,12">11,12</td>
                             {% elif lstCourse['grade_lower'] == 12 and lstCourse['grade_upper'] == 12  %}
-                            <td class="bg-#9d152d" data-value="12">12</td>
+                            <td class="bg-danger" data-value="12">12</td>
                             {% endif %}
 
 
