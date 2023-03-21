@@ -32,7 +32,7 @@
     <div class="row">
       <div class="col">
         <div class="card">
-        <div class="container">
+        <div class="container shadow-lg">
         <h3>Class Description:</h3> 
         {% if lstCourse['description'] != '' %}
         <p>{{lstCourse['description']}}</p>
@@ -45,7 +45,7 @@
       <div class="col">
         <div class ="col text-center">
           <div class="w-100"> 
-            <ul class="list-group">
+            <ul class="list-group shadow-lg">
               <li class="list-group-item">Credits: {{lstCourse['credits']}}</li>
               <li class="list-group-item">Length: {{lstCourse['length']}}</li>
                 {% if lstCourse['grade_lower'] != '' %}
@@ -67,7 +67,7 @@
         {% if  lstCourse['course_id'].find("INA") > -1 %}
         <div class="card" style="width: 18rem;">
           
-          <div class="card-body">
+          <div class="card-body shadow-lg">
             <h5 class="card-title">ACADEMY INFO</h5>
             <p class="card-text">This class is part of the engineering academy. To learn more about the engineering academy please see the link below.</p>
             <a target="_blank" href="https://sites.google.com/district158.org/hhsengacademy/home?pli=1" class="btn btn-primary">Go to academy page</a>
@@ -80,7 +80,7 @@
         {% if  lstCourse['course_id'].find("MED") > -1 %}
         <div class="card" style="width: 18rem;">
           
-          <div class="card-body">
+          <div class="card-body shadow-lg">
             <h5 class="card-title">ACADEMY INFO</h5>
             <p class="card-text">This class is part of the medical academy. To learn more about the medical academy please see the link below.</p>
             <a target="_blank" href="https://huntley158.org/hhs/medical-academy/" class="btn btn-primary">Go to academy page</a>
@@ -94,7 +94,7 @@
         {% elif  lstCourse['course_id'].find("FNA") > -1 %}
         <div class="card" style="width: 18rem;">
           
-          <div class="card-body">
+          <div class="card-body shadow-lg">
             <h5 class="card-title">ACADEMY INFO</h5>
             <p class="card-text">This class is part of the Fine Arts Academy. To learn more about the Fine Arts Academy please see the link below.</p>
             <a  target="_blank" href="https://sites.google.com/district158.org/hhs-fine-arts-academy/requirements-points" class="btn btn-primary">Go to academy page</a>
@@ -107,7 +107,7 @@
         {% if  lstCourse['course_id'].find("SST") > -1 %}
         <div class="card" style="width: 18rem;">
           
-          <div class="card-body">
+          <div class="card-body shadow-lg">
             <h5 class="card-title">ACADEMY INFO</h5>
             <p class="card-text">This class is part of the Global Academy. To learn more about the Global Academy please see the link below.</p>
             <a target="_blank" href="https://sites.google.com/district158.org/hhsglobalacademy/home" class="btn btn-primary">Go to academy page</a>
@@ -118,7 +118,7 @@
         {% endif %}
 
         {% if  lstCourse['tags'].find("Honors") > -1 %}
-        <div class="card" style="width: 18rem;">
+        <div class="card shadow-lg" style="width: 18rem;">
           
           <div class="card-body">
             <h5 class="card-title">Grading Info</h5>
@@ -127,7 +127,7 @@
           </div>
         </div>
         {% elif  lstCourse['tags'].find("AP") > -1 %}
-        <div class="card" style="width: 18rem;">
+        <div class="card shadow-lg" style="width: 18rem;">
           
           <div class="card-body">
             <h5 class="card-title">Grading Info</h5>
@@ -136,7 +136,7 @@
           </div>
         </div>
         {% else %}
-        <div class="card" style="width: 18rem;">
+        <div class="card shadow-lg" style="width: 18rem;">
           
           <div class="card-body">
             <h5 class="card-title">Grading Info</h5>
@@ -146,7 +146,7 @@
         {% endif %}
 
         {% if lstCourse['tags'].find("Blended") > -1 %}
-      <div class="card" style="width: 18rem;">
+      <div class="card shadow-lg" style="width: 18rem;">
           
         <div class="card-body">
           <h5 class="card-title">Blended Info</h5>

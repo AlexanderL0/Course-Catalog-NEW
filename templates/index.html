@@ -19,10 +19,11 @@
   </button>
 </nav>
 
-<div class="jumbotron p-3">
+<div class="jumbotron p-3 ">
   <div class="well text-center">
 
-      <h1>HHS Course Catalog</h1>
+     <div><h1>HHS Course Catalog</h1></div>
+    
 
   </div>
 </div>
@@ -98,12 +99,12 @@
 
 
                 <!-- Create's table -->
-                <table id= "classes-table" class="table shadow-lg table-dark">
+                  <table id= "classes-table" class="table shadow-lg table-dark">
                     <thead>
                     <tr>
 
 
-                        <th>Number</th>
+                        <th>Favorite</th>
                         <th>ID</th>
                         <th>Name</th>
                         <th>Subject</th>
@@ -116,11 +117,19 @@
                       <!-- Imports data from database -->
                     {% for lstCourse in lstCourse %}
                         <tr class= "filterDiv {{lstCourse['subject']}}">
-                            <td class="bg-danger">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                              </svg>
-                            </td>
+                            
+                              
+                              
+                                <td>
+                                  <button class="favorite-button" onclick="toggleFavorite()" data-class-id="{{ lstCourse['name'] }}">
+                                  Favorite 
+                                  <i class="far fa-star"></i>
+                                </button>
+                                </td>
+                                
+                    
+
+                            
                             <td class="bg-secondary">{{ lstCourse['course_id'] }}</td>
                             <td class="bg-danger">
                                 <a href="{{url_for('Template', Classes = lstCourse['course_id'])}}" class="btn btn-muted btn-xs">
@@ -332,6 +341,19 @@
 */
 let selectedSubjects = [];
 let selectedGrades = [];
+console.log("hello");
+
+function toggleFavorite() {
+  console.log("hello");
+  var classId = $(this).data('class-id');
+  $.ajax({
+    url: '/favorite-class/' + classId,
+    type: 'POST',
+    success: function() {
+      alert('Class favorited!');
+    }
+  });
+};
 
 
 document.querySelectorAll('.subject-checkbox').forEach(checkbox => {
@@ -347,6 +369,17 @@ document.querySelectorAll('.subject-checkbox').forEach(checkbox => {
     filterTable();
   });
 });
+
+function toggleStar(button) {
+  var icon = button.getElementsByTagName("i")[0];
+  if (icon.classList.contains("far")) {
+    icon.classList.remove("far");
+    icon.classList.add("fas");
+  } else {
+    icon.classList.remove("fas");
+    icon.classList.add("far");
+  }
+}
 
 
 document.querySelectorAll('.grade-checkbox').forEach(checkbox => {
