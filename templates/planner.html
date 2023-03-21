@@ -15,15 +15,14 @@
 
 <div class="jumbotron p-3">
   <div class="well text-center">
-      <h1>My Course Plans</h1>
+      <h1>My Favorited Courses</h1>
   </div>
 </div>
 
     <div class='col' style="margin-top: 20px;">
       <div class="card">
       <div class="well text-center">
-        <div class="container">
-                  <h3>Freshman Year Courses</h3>            
+        <div class="container">         
                   <table class="table table-striped">
                   <thead>
               <tr>
@@ -44,86 +43,5 @@
       </div>
       </div>
     </div>
-
-    <div class="col" style="margin-top: 20px;">
-      <div class="card">
-      <div class="well text-center">
-      <div class="container">
-      <h3>Sophomore Year Courses</h3>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Class Name</th>
-            <th>Subject</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for sophomore in sophomore %}
-          <tr>
-            <td>{{class}}</td>
-            <td>{{subject}}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
-  </div>
-
-  <div class='col' style="margin-top: 20px;">
-    <div class="card">
-    <div class="well text-center">
-      <div class="container">
-                <h3>Junior Year Courses</h3>            
-                <table class="table table-striped">
-                <thead>
-            <tr>
-              <th>Class Name</th>
-              <th>Subject</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for profiles in profiles %}
-              <tr>
-                <td>{{class}}</td>
-                <td>{{subject}}</td>
-              </tr>
-              {% endfor %}
-          </tbody>
-        </table>
-      </div>
-    </div>
-    </div>
-  </div>
-
-  <div class='col' style="margin-top: 20px;">
-    <div class="card">
-    <div class="well text-center">
-      <div class="container">
-                <h3>Senior Year Courses</h3>            
-                <table class="table table-striped">
-                <thead>
-            <tr>
-              <th>Class Name</th>
-              <th>Subject</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for profiles in profiles %}
-              <tr>
-                <td>{{class}}</td>
-                <td>{{subject}}</td>
-              </tr>
-              {% endfor %}
-          </tbody>
-        </table>
-      </div>
-    </div>
-    </div>
-  </div>
-
-
-
 
 {% endblock %}

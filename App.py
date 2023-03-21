@@ -1,5 +1,5 @@
 import sqlite3
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
 
 app = Flask (__name__)
 
@@ -21,6 +21,21 @@ def index():
     data = list(set(data))
     conn.close()
     return render_template("index.html", lstCourse=lstCourse, data=data)
+
+@app.route('/favorite-class/<int:class_id>', methods=['POST'])
+def favorite_class(class_id):
+    if 'favorite_classes' not in session:
+        session['favorite_classes'] = []
+    session['favorite_classes'].append(class_id)
+    return '', 204
+
+@app.route('/favorites')
+def favorites():
+    conn = get_db_connection()
+    favorite_classes = session.get('favorite_classes', [])
+    classes = conn.execute ("SELECT name FROM catalog")# retrieve list of classes from database
+    favorite_classes = [c for c in classes if c['name'] in favorite_classes]
+    return render_template('favorites.html', favorite_classes=favorite_classes)
  
 @app.route('/<Classes>')
 def Template(Classes):
