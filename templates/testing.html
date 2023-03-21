@@ -1,30 +1,81 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Bootstrap Dropdown Menu Example</title>
-    <!-- Include Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  </head>
   <body>
+<!-- Example HTML table with class names -->
+<table id="classTable">
+  <tr>
+    <td>Math</td>
+    <td><button onclick="favoriteClass('Math')">Favorite</button></td>
+  </tr>
+  <tr>
+    <td>Science</td>
+    <td><button onclick="favoriteClass('Science')">Favorite</button></td>
+  </tr>
+  <tr>
+    <td>English</td>
+    <td><button onclick="favoriteClass('English')">Favorite</button></td>
+  </tr>
+</table>
 
-    <div class="container">
-      <h2>Bootstrap Dropdown Menu Example</h2>
-      
-      <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Menu
-        <span class="caret"></span></button>
-        <ul class="dropdown-menu">
-          <li><a href="#">Menu Item 1</a></li>
-          <li><a href="#">Menu Item 2</a></li>
-          <li><a href="#">Menu Item 3</a></li>
-        </ul>
-      </div>
-      
-    </div>
+<!-- Element to display the favorited class names -->
+<div id="favoriteClasses"></div>
 
-    <!-- Include jQuery and Bootstrap JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script>
+// Array to hold the favorited class names
+let favoriteClasses = [];
+
+// Function to handle the "favorite" button clicks
+function favoriteClass(className) {
+  // Check if the class has already been favorited
+  if (!favoriteClasses.includes(className)) {
+    // Add the class to the favorites array
+    favoriteClasses.push(className);
+    
+    // Update the list of favorited classes
+    updateFavoritesList();
+  }
+}
+
+// Function to handle the "unfavorite" button clicks
+function unfavoriteClass(className) {
+  // Find the index of the class in the favorites array
+  let index = favoriteClasses.indexOf(className);
+  
+  // If the class is found, remove it from the array
+  if (index !== -1) {
+    favoriteClasses.splice(index, 1);
+    
+    // Update the list of favorited classes
+    updateFavoritesList();
+  }
+}
+
+// Function to update the list of favorited classes
+function updateFavoritesList() {
+  // Get the favorite classes element from the DOM
+  let favoritesElement = document.getElementById("favoriteClasses");
+  
+  // Clear the previous contents of the favorites element
+  favoritesElement.innerHTML = "";
+  
+  // Loop through the favorited classes and add them to the element
+  favoriteClasses.forEach(className => {
+    let classElement = document.createElement("p");
+    classElement.innerText = className;
+    
+    // Create an "unfavorite" button for each class
+    let unfavoriteButton = document.createElement("button");
+    unfavoriteButton.innerText = "Unfavorite";
+    unfavoriteButton.onclick = function() { unfavoriteClass(className); };
+    
+    // Add the class name and unfavorite button to the element
+    classElement.appendChild(unfavoriteButton);
+    favoritesElement.appendChild(classElement);
+  });
+}
+
+
+</script>
 
   </body>
 </html>

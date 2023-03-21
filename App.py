@@ -9,6 +9,7 @@ def get_db_connection():
     return conn
 
 
+
 @app.route('/')
 def index():
     conn = get_db_connection()
