@@ -23,6 +23,7 @@
   <div class="well text-center">
 
      <div><h1>HHS Course Catalog</h1></div>
+     <div id="favoriteClasses"></div>
     
 
   </div>
@@ -118,10 +119,12 @@
                     {% for lstCourse in lstCourse %}
                         <tr class= "filterDiv {{lstCourse['subject']}}">
                             
+                              <script>
+                                var name = lstCourse['name'];
+                              </script>
                               
-                              
-                                <td>
-                                  <button class="favorite-button" onclick="toggleFavorite()" data-class-id="{{ lstCourse['name'] }}">
+                                <td> 
+                                  <button class="favorite-button" onclick="favoriteClass('{{ lstCourse['name'] }}')" data-class-id="{{ lstCourse['name'] }}">
                                   Favorite 
                                   <i class="far fa-star"></i>
                                 </button>
@@ -339,6 +342,7 @@
       }
     });
 */
+/*
 let selectedSubjects = [];
 let selectedGrades = [];
 console.log("hello");
@@ -354,7 +358,7 @@ function toggleFavorite() {
     }
   });
 };
-
+*/
 
 document.querySelectorAll('.subject-checkbox').forEach(checkbox => {
   checkbox.addEventListener('change', (event) => {
@@ -414,6 +418,60 @@ function filterTable() {
     classRow.style.display = showRow ? '' : 'none';
   }
 }
+// Array to hold the favorited class names
+let favoriteClasses = [];
+
+// Function to handle the "favorite" button clicks
+function favoriteClass(className) {
+  // Check if the class has already been favorited
+  if (!favoriteClasses.includes(className)) {
+    // Add the class to the favorites array
+    favoriteClasses.push(className);
+    
+    // Update the list of favorited classes
+    updateFavoritesList();
+  }
+}
+
+// Function to handle the "unfavorite" button clicks
+function unfavoriteClass(className) {
+  // Find the index of the class in the favorites array
+  let index = favoriteClasses.indexOf(className);
+  
+  // If the class is found, remove it from the array
+  if (index !== -1) {
+    favoriteClasses.splice(index, 1);
+    
+    // Update the list of favorited classes
+    updateFavoritesList();
+  }
+}
+
+// Function to update the list of favorited classes
+function updateFavoritesList() {
+  // Get the favorite classes element from the DOM
+  let favoritesElement = document.getElementById("favoriteClasses");
+  
+  // Clear the previous contents of the favorites element
+  favoritesElement.innerHTML = "";
+  
+  // Loop through the favorited classes and add them to the element
+  favoriteClasses.forEach(className => {
+    let classElement = document.createElement("p");
+    classElement.innerText = className;
+    
+    // Create an "unfavorite" button for each class
+    let unfavoriteButton = document.createElement("button");
+    unfavoriteButton.innerText = "Unfavorite";
+    unfavoriteButton.onclick = function() { unfavoriteClass(className); };
+    
+    // Add the class name and unfavorite button to the element
+    classElement.appendChild(unfavoriteButton);
+    favoritesElement.appendChild(classElement);
+  });
+}
+
+
 
 </script>
 
