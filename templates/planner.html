@@ -5,6 +5,11 @@
 
 
 {% block body %}
+<style>
+  .favorited {
+     color: gold;
+  }
+</style>
 <!-- Nav bar to get back to home page-->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="http://localhost:5000/">Back to Catalog</a>
@@ -31,17 +36,53 @@
               </tr>
             </thead>
             <tbody>
-              {% for freshman in freshman %}
-              <tr>
-                <td>{{class}}</td>
-                <td>{{subject}}</td>
-              </tr>
-              {% endfor %}
+
             </tbody>
           </table>
         </div>
       </div>
       </div>
     </div>
+
+    <script>
+      let classes = JSON.parse(localStorage.getItem("classes"));
+      let favoritesDiv = document.getElementById("favorites");
+
+      // Add event listeners to the favorite stars in the favorites list
+      let favoriteStars = document.querySelectorAll("#favorites .fa-star");
+
+      function updateFavorites() {
+        let favoritesList = "<table><tr><th>Name</th><th>Subject</th><th>Unfavorite</th></tr>";
+
+        for (let i = 0; i < classes.length; i++) {
+          let classObj = classes[i];
+
+          if (classObj.favorite) {
+            favoritesList += "<tr><td>" + classObj.name + "</td><td>" + classObj.subject + "</td><td><span class='fa fa-star favorited'></span></td></tr>";
+          }
+        }
+
+        favoritesList += "</table>";
+
+        favoritesDiv.innerHTML = favoritesList;
+
+        // Add event listeners to the favorite stars in the favorites list
+        let favoriteStars = document.querySelectorAll("#favorites .fa-star");
+
+        favoriteStars.forEach(function(star, index) {
+          star.addEventListener("click", function() {
+            let favoriteClassName = star.parentNode.parentNode.firstChild.textContent;
+            let classIndex = classes.findIndex(function(classObj) {
+              return classObj.name === favoriteClassName;
+            });
+
+            classes[classIndex].favorite = false;
+            localStorage.setItem("classes", JSON.stringify(classes));
+            updateFavorites();
+          });
+        });
+      }
+      updateFavorites();
+    </script>
 
 {% endblock %}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Favorite Classes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+      th, td {
+        padding: 10px;
+        text-align: left;
+      }
+      th {
+        background-color: #ddd;
+      }
+      .favorited {
+        color: gold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Favorite Classes</h1>
+    <table>
+      <tbody id="favorites">
+      </tbody>
+    </table>
+    <button onclick="goToCatalog()">Go to Catalog</button>
+    <script>
+      let classes = JSON.parse(localStorage.getItem("classes"));
+
+      let favoritesDiv = document.getElementById("favorites");
+
+      function updateFavorites() {
+        let favoritesList = "<table><tr><th>Name</th><th>Subject</th><th>Unfavorite</th></tr>";
+
+        for (let i = 0; i < classes.length; i++) {
+          let classObj = classes[i];
+
+          if (classObj.favorite) {
+            favoritesList += "<tr><td>" + classObj.name + "</td><td>" + classObj.subject + "</td><td><span class='fa fa-star favorited'></span></td></tr>";
+          }
+        }
+
+        favoritesList += "</table>";
+
+        favoritesDiv.innerHTML = favoritesList;
+
+        // Add event listeners to the favorite stars in the favorites list
+        let favoriteStars = document.querySelectorAll("#favorites .fa-star");
+
+        favoriteStars.forEach(function(star, index) {
+          star.addEventListener("click", function() {
+            let favoriteClassName = star.parentNode.parentNode.firstChild.textContent;
+            let classIndex = classes.findIndex(function(classObj) {
+              return classObj.name === favoriteClassName;
+            });
+
+            classes[classIndex].favorite = false;
+            localStorage.setItem("classes", JSON.stringify(classes));
+            updateFavorites();
+          });
+        });
+      }
+
+      function goToCatalog() {
+        window.location.href = "test";
+      }
+
+      updateFavorites();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Class Favorites</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+      th, td {
+        padding: 10px;
+        text-align: left;
+      }
+      th {
+        background-color: #ddd;
+      }
+      .favorited {
+        color: gold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>All Classes</h1>
+    <table>
+      <tbody id="classes">
+      </tbody>
+    </table>
+    <button onclick="goToFavoritePage()">Go to Favorites</button>
+    <script>
+      // Sample table of classes
+      let classes = [
+        { name: "English 101", subject: "English", favorite: false },
+        { name: "Math 101", subject: "Math", favorite: false },
+        { name: "History 101", subject: "History", favorite: false },
+        { name: "Science 101", subject: "Science", favorite: false },
+        { name: "Art 101", subject: "Art", favorite: false }
+      ];
+
+      // Find the elements where we want to display the classes
+      let classesDiv = document.getElementById("classes");
+
+      // Function to update the display of the classes
+      function updateClasses() {
+        let table = "<table><tr><th>Name</th><th>Subject</th><th>Favorite</th></tr>";
+        for (let i = 0; i < classes.length; i++) {
+          let classObj = classes[i];
+          let star = classObj.favorite ? "<span class='fa fa-star favorited'></span>" : "<span class='fa fa-star'></span>";
+          table += "<tr><td>" + classObj.name + "</td><td>" + classObj.subject + "</td><td class='favorite'>" + star + "</td></tr>";
+        }
+        table += "</table>";
+        classesDiv.innerHTML = table;
+        // Add event listeners to the favorite stars in the table
+        let favoriteStars = document.querySelectorAll("#classes .favorite");
+        favoriteStars.forEach(function(star, index) {
+          star.addEventListener("click", function() {
+            classes[index].favorite = !classes[index].favorite;
+            localStorage.setItem("classes", JSON.stringify(classes));
+            updateClasses();
+          });
+        });
+      }
+
+      // Load the favorite state of classes from localStorage
+      let storedClasses = localStorage.getItem("classes");
+      if (storedClasses) {
+        classes = JSON.parse(storedClasses);
+      }
+
+      // Call the update function to initially display the classes
+      updateClasses();
+
+      // Function to navigate to the favorite page
+      function goToFavoritePage() {
+        window.location.href = "favorite";
+      }
+    </script>
+  </body>
+</html>

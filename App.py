@@ -23,12 +23,6 @@ def index():
     conn.close()
     return render_template("index.html", lstCourse=lstCourse, data=data)
 
-@app.route('/favorite-class/<int:class_id>', methods=['POST'])
-def favorite_class(class_id):
-    if 'favorite_classes' not in session:
-        session['favorite_classes'] = []
-    session['favorite_classes'].append(class_id)
-    return '', 204
 
 @app.route('/favorites')
 def favorites():
@@ -55,11 +49,15 @@ def Grade():
 
 @app.route('/test')
 def Test():
-    return render_template("testing.html")
+    return render_template("catalog.html")
 
 @app.route('/blended')
 def Blend():
     return render_template("blended.html")
+
+@app.route('/favorite')
+def Fav():
+    return render_template("favorite.html")
 
 
 

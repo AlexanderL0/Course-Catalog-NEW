@@ -29,6 +29,17 @@
   </div>
 </div>
 
+<table>
+  <tbody id="classes">
+  </tbody>
+</table>
+
+<style>
+  .favorited {
+        color: gold;
+      }
+</style>
+
 <div class="container">
     <div class="row">
         <div class="col md-12">
@@ -117,7 +128,7 @@
                     <tbody>
                       <!-- Imports data from database -->
                     {% for lstCourse in lstCourse %}
-                        <tr class= "filterDiv {{lstCourse['subject']}}">
+                        <tr class= "filterDiv {{lstCourse['subject']}}" favorite=false>
                             
                               <script>
                                 var name = lstCourse['name'];
@@ -234,131 +245,9 @@
           gcheckboxes.style.display = 'none';
         }
       });
-/*
-    ///Checkboxes code
-    const toggleBtn = document.getElementById('toggle-btn');
-      const checkboxes = document.getElementById('checkboxes');
-      const tableBody = document.getElementById('classes-table').getElementsByTagName('tbody')[0];
 
-
-      toggleBtn.addEventListener('click', () => {
-        if (checkboxes.style.display === 'none') {
-          checkboxes.style.display = 'block';
-        } else {
-          checkboxes.style.display = 'none';
-        }
-      });
-
-
-      checkboxes.addEventListener('click', () => {
-        const selectedSubjects = [];
-        const subjectCheckboxes = checkboxes.querySelectorAll('input[type="checkbox"]:checked');
-
-
-        subjectCheckboxes.forEach((checkbox) => {
-          selectedSubjects.push(checkbox.value);
-        });
-
-
-        if (selectedSubjects.length === 0) {
-          // Show all rows if no subjects are selected
-          Array.from(tableBody.rows).forEach((row) => {
-            row.style.display = '';
-          });
-        } else {
-          Array.from(tableBody.rows).forEach((row) => {
-            const subject = row.cells[3].textContent;
-            if (selectedSubjects.includes(subject)) {
-              row.style.display = '';
-            } else {
-              row.style.display = 'none';
-            }
-          });
-        }
-      });
-     
-
-
-      //GRADE LEVEL Checkboxes code
-    const gradetoggleBtn = document.getElementById('gradetoggle-btn');
-      const gcheckboxes = document.getElementById('gradeCheckboxes');
-      const gradetableBody = document.getElementById('classes-table').getElementsByTagName('tbody')[0];
-
-
-      gradetoggleBtn.addEventListener('click', () => {
-        if (gcheckboxes.style.display === 'none') {
-          gcheckboxes.style.display = 'block';
-        } else {
-          gcheckboxes.style.display = 'none';
-        }
-      });
-
-
-      gcheckboxes.addEventListener('click', () => {
-        const selectedGrades = [];
-        const gradeCheckboxes = gcheckboxes.querySelectorAll('input[type="checkbox"]:checked');
-
-
-        gradeCheckboxes.forEach((checkbox) => {
-          selectedGrades.push(checkbox.value);
-        });
-
-
-        if (selectedGrades.length === 0) {
-          // Show all rows if no subjects are selected
-          Array.from(tableBody.rows).forEach((row) => {
-            row.style.display = '';
-          });
-        } else {
-          Array.from(tableBody.rows).forEach((row) => {
-            const grade = row.cells[4].textContent;
-            if (grade.includes(selectedGrades)) {
-              row.style.display = '';
-            } else {
-              row.style.display = 'none';
-            }
-          });
-        }
-      });
-*/
-
-
-/*
-    const subjectFilterSelect = document.getElementById("subject-filter-select");
-    const classTable = document.getElementById("classes-table");
-
-
-    subjectFilterSelect.addEventListener("change", function() {
-    const filterValue = subjectFilterSelect.value;
-
-
-      for (let i = 1; i < classTable.rows.length; i++) {
-        const subjectCell = classTable.rows[i].cells[3];
-        if (filterValue === "all" || subjectCell.innerHTML === filterValue) {
-          classTable.rows[i].style.display = "";
-        } else {
-          classTable.rows[i].style.display = "none";
-        }
-      }
-    });
-*/
-/*
 let selectedSubjects = [];
 let selectedGrades = [];
-console.log("hello");
-
-function toggleFavorite() {
-  console.log("hello");
-  var classId = $(this).data('class-id');
-  $.ajax({
-    url: '/favorite-class/' + classId,
-    type: 'POST',
-    success: function() {
-      alert('Class favorited!');
-    }
-  });
-};
-*/
 
 document.querySelectorAll('.subject-checkbox').forEach(checkbox => {
   checkbox.addEventListener('change', (event) => {
@@ -418,6 +307,7 @@ function filterTable() {
     classRow.style.display = showRow ? '' : 'none';
   }
 }
+
 // Array to hold the favorited class names
 let favoriteClasses = [];
 
@@ -470,6 +360,48 @@ function updateFavoritesList() {
     favoritesElement.appendChild(classElement);
   });
 }
+      // Sample table of classes
+      let classes = [
+        { name: "English 101", subject: "English", favorite: false },
+        { name: "Math 101", subject: "Math", favorite: false },
+        { name: "History 101", subject: "History", favorite: false },
+        { name: "Science 101", subject: "Science", favorite: false },
+        { name: "Art 101", subject: "Art", favorite: false }
+      ];
+
+      // Find the elements where we want to display the classes
+      let classesDiv = document.getElementById("classes");
+
+      // Function to update the display of the classes
+      function updateClasses() {
+        let table = "<table><tr><th>Name</th><th>Subject</th><th>Favorite</th></tr>";
+        for (let i = 0; i < classes.length; i++) {
+          let classObj = classes[i];
+          let star = classObj.favorite ? "<span class='fa fa-star favorited'></span>" : "<span class='fa fa-star'></span>";
+          table += "<tr><td>" + classObj.name + "</td><td>" + classObj.subject + "</td><td class='favorite'>" + star + "</td></tr>";
+        }
+        table += "</table>";
+        classesDiv.innerHTML = table;
+        // Add event listeners to the favorite stars in the table
+        let favoriteStars = document.querySelectorAll("#classes .favorite");
+        favoriteStars.forEach(function(star, index) {
+          star.addEventListener("click", function() {
+            classes[index].favorite = !classes[index].favorite;
+            localStorage.setItem("classes", JSON.stringify(classes));
+            updateClasses();
+          });
+        });
+      }
+
+      // Load the favorite state of classes from localStorage
+      let storedClasses = localStorage.getItem("classes");
+      if (storedClasses) {
+        classes = JSON.parse(storedClasses);
+      }
+
+      // Call the update function to initially display the classes
+      updateClasses();
+
 
 
 
