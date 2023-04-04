@@ -1,5 +1,21 @@
-import sqlite3
+import sqlite3, json
 from flask import Flask, render_template, request, session
+#from bs4 import BeautifulSoup
+
+#with open('index.html') as f:
+#    soup = BeautifulSoup(f, 'html.parser')
+
+# Find the <script> tag containing the JavaScript list
+# script_tag = soup.find('script')
+
+# Get the JavaScript code inside the <script> tag
+# js_code = script_tag.string.strip()
+
+# Extract the JavaScript list from the code
+# js_list = js_code.split('=')[1].strip().strip(';')
+
+# Convert the JavaScript list to a Python list using the json module
+# py_list = json.loads(js_list)
 
 app = Flask (__name__)
 
@@ -47,7 +63,9 @@ def Template(Classes):
 
 @app.route('/plan')
 def Plan():
-    return render_template("planner.html")
+   # py_list = json.loads(favoriteClasses)
+
+    return render_template("planner.html",)
 
 @app.route('/grading')
 def Grade():
