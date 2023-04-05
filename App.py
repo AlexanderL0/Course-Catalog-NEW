@@ -59,7 +59,5 @@ def Blend():
 def Fav():
     return render_template("favorite.html")
 
-
-
 if __name__ == "__main__":
     app.run(debug=True)
