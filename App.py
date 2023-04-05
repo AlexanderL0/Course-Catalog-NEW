@@ -65,9 +65,17 @@ def Plan():
 def Grade():
     return render_template("grading.html")
 
-@app.route('/test')
+@app.route('/catalog')
 def Test():
-    return render_template("catalog.html")
+    conn = get_db_connection()
+    lstCourse = conn.execute('''select * from Catalog''').fetchall()
+    cursor = conn.cursor()
+    cursor.execute("SELECT subject FROM catalog")
+    rows = cursor.fetchall()
+    data = [row[0] for row in rows]
+    data = list(set(data))
+    conn.close()
+    return render_template("catalog.html", lstCourse=lstCourse)
 
 @app.route('/blended')
 def Blend():

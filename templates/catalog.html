@@ -30,13 +30,7 @@
     <button onclick="goToFavoritePage()">Go to Favorites</button>
     <script>
       // Sample table of classes
-      let classes = [
-        { name: "English 101", subject: "English", favorite: false },
-        { name: "Math 101", subject: "Math", favorite: false },
-        { name: "History 101", subject: "History", favorite: false },
-        { name: "Science 101", subject: "Science", favorite: false },
-        { name: "Art 101", subject: "Art", favorite: false }
-      ];
+      let classes = lstCourse;
 
       // Find the elements where we want to display the classes
       let classesDiv = document.getElementById("classes");
@@ -46,7 +40,7 @@
         let table = "<table><tr><th>Name</th><th>Subject</th><th>Favorite</th></tr>";
         for (let i = 0; i < classes.length; i++) {
           let classObj = classes[i];
-          let star = classObj.favorite ? "<span class='fa fa-star favorited'></span>" : "<span class='fa fa-star'></span>";
+          let star = classObj.favorite == 1 ? "<span class='fa fa-star favorited'></span>" : "<span class='fa fa-star'></span>";
           table += "<tr><td>" + classObj.name + "</td><td>" + classObj.subject + "</td><td class='favorite'>" + star + "</td></tr>";
         }
         table += "</table>";
