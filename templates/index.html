@@ -387,22 +387,20 @@ function updateFavoritesList() {
         favoriteStars.forEach(function(star, index) {
           star.addEventListener("click", function() {
             classes[index].favorite = !classes[index].favorite;
-            localStorage.setItem("classes", JSON.stringify(classes));
+            localStorage.setItem("classfavs", JSON.stringify(classes));
             updateClasses();
           });
         });
       }
 
       // Load the favorite state of classes from localStorage
-      let storedClasses = localStorage.getItem("classes");
+      let storedClasses = localStorage.getItem("classfavs");
       if (storedClasses) {
         classes = JSON.parse(storedClasses);
       }
 
       // Call the update function to initially display the classes
       updateClasses();
-
-
 
 
 </script>
