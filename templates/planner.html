@@ -22,68 +22,39 @@
 <div class="jumbotron p-3">
   <div class="well text-center">
       <h1>My Favorited Courses</h1>
+      <div id="favoriteClasses">
+
+      </div>
   </div>
 </div>
 
-    <div class='col' style="margin-top: 20px;">
-      <div class="card">
-      <div class="well text-center">
-        <div class="container">         
-                  <table class="table table-striped" id="favorites">
-                  <thead>
-              <tr>
-                <th>Class Name</th>
-                <th>Subject</th>
-              </tr>
-            </thead>
-            <tbody>
-
-            </tbody>
-          </table>
-        </div>
-      </div>
-      </div>
-    </div>
-
-    <script>
-      let classes = JSON.parse(localStorage.getItem("classfavs"));
-      let favoritesDiv = document.getElementById("favorites");
-
-      // Add event listeners to the favorite stars in the favorites list
-      let favoriteStars = document.querySelectorAll("#favorites .fa-star");
-
-      function updateFavorites() {
-        let favoritesList = "<table><tr><th>Name</th><th>Subject</th><th>Unfavorite</th></tr>";
-
-          for (let i = 0; i < classes.length; i++) {
-          let classObj = classes[i];
-
-          if (classObj.favorite) {
-            favoritesList += "<tr><td>" + classObj.name + "</td><td>" + classObj.subject + "</td><td><span class='fa fa-star favorited'></span></td></tr>";
-          }
-        }
-
-        favoritesList += "</table>";
-
-        favoritesDiv.innerHTML = favoritesList;
-
-        // Add event listeners to the favorite stars in the favorites list
-        let favoriteStars = document.querySelectorAll("#favorites .fa-star");
-
-        favoriteStars.forEach(function(star, index) {
-          star.addEventListener("click", function() {
-            let favoriteClassName = star.parentNode.parentNode.firstChild.textContent;
-            let classIndex = classes.findIndex(function(classObj) {
-              return classObj.name === favoriteClassName;
-            });
-
-            classes[classIndex].favorite = false;
-            localStorage.setItem("classfavs", JSON.stringify(classes));
-            updateFavorites();
-          });
-        });
-      }
-      updateFavorites();
-    </script>
+<script>
+      updateFavoritesList();
+      function updateFavoritesList() {
+  // Get the favorite classes element from the DOM
+  let favoriteClasses =[];
+  favoriteClasses = JSON.parse(localStorage.getItem("favclasses"));
+  let favoritesElement = document.getElementById("favoriteClasses");
+  
+  
+  // Clear the previous contents of the favorites element
+  favoritesElement.innerHTML = "";
+  
+  // Loop through the favorited classes and add them to the element
+  favoriteClasses.forEach(className => {
+    let classElement = document.createElement("p");
+    classElement.innerText = className;
+    
+    // Create an "unfavorite" button for each class
+    let unfavoriteButton = document.createElement("button");
+    unfavoriteButton.innerText = "Unfavorite";
+    unfavoriteButton.onclick = function() { unfavoriteClass(className); };
+    
+    // Add the class name and unfavorite button to the element
+    classElement.appendChild(unfavoriteButton);
+    favoritesElement.appendChild(classElement);
+  });
+}
+</script>
 
 {% endblock %}

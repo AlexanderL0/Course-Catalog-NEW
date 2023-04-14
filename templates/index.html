@@ -29,10 +29,7 @@
   </div>
 </div>
 
-<table>
-  <tbody id="classes">
-  </tbody>
-</table>
+
 
 <style>
   .favorited {
@@ -131,7 +128,7 @@
                         <tr class= "filterDiv {{lstCourse['subject']}}" favorite=false>
                             
                               <script>
-                                var name = lstCourse['name'];
+                                //var name = lstCourse['name'];
                               </script>
                               
                                 <td> 
@@ -309,28 +306,42 @@ function filterTable() {
 }
 
 // Array to hold the favorited class names
-let favoriteClasses = [];
+let favoriteClasses =[];
+favoriteClasses = JSON.parse(localStorage.getItem("favclasses"));
+updateFavoritesList()
 
 // Function to handle the "favorite" button clicks
 function favoriteClass(className) {
+  favoriteClasses = JSON.parse(localStorage.getItem("favclasses"));
+  console.log(favoriteClasses);
   // Check if the class has already been favorited
-  if (!favoriteClasses.includes(className)) {
-    // Add the class to the favorites array
+  if (favoriteClasses == null) {
+    favoriteClasses =[className];
+    localStorage.setItem("favclasses", JSON.stringify(favoriteClasses));
+
+  }
+  else if (!favoriteClasses.includes(className)) {
+  // Add the class to the favorites array
     favoriteClasses.push(className);
-    
-    // Update the list of favorited classes
-    updateFavoritesList();
+
+    localStorage.setItem("favclasses", JSON.stringify(favoriteClasses));
+      
+      // Update the list of favorited classes
+    updateFavoritesList();   
   }
 }
 
 // Function to handle the "unfavorite" button clicks
 function unfavoriteClass(className) {
   // Find the index of the class in the favorites array
+  
   let index = favoriteClasses.indexOf(className);
   
   // If the class is found, remove it from the array
   if (index !== -1) {
     favoriteClasses.splice(index, 1);
+
+    localStorage.setItem("favclasses", JSON.stringify(favoriteClasses));
     
     // Update the list of favorited classes
     updateFavoritesList();
@@ -340,7 +351,9 @@ function unfavoriteClass(className) {
 // Function to update the list of favorited classes
 function updateFavoritesList() {
   // Get the favorite classes element from the DOM
+  favoriteClasses = JSON.parse(localStorage.getItem("favclasses"));
   let favoritesElement = document.getElementById("favoriteClasses");
+  
   
   // Clear the previous contents of the favorites element
   favoritesElement.innerHTML = "";
@@ -358,7 +371,11 @@ function updateFavoritesList() {
     // Add the class name and unfavorite button to the element
     classElement.appendChild(unfavoriteButton);
     favoritesElement.appendChild(classElement);
+
+    
   });
+  localStorage.setItem("favoriteClasses", JSON.stringify());
+
 }
       // Sample table of classes
       let classes = [
@@ -371,7 +388,6 @@ function updateFavoritesList() {
 
       // Find the elements where we want to display the classes
       let classesDiv = document.getElementById("classes");
-
       // Function to update the display of the classes
       function updateClasses() {
         let table = "<table><tr><th>Name</th><th>Subject</th><th>Favorite</th></tr>";
@@ -387,20 +403,22 @@ function updateFavoritesList() {
         favoriteStars.forEach(function(star, index) {
           star.addEventListener("click", function() {
             classes[index].favorite = !classes[index].favorite;
-            localStorage.setItem("classfavs", JSON.stringify(classes));
+            localStorage.setItem("classes", JSON.stringify(classes));
             updateClasses();
           });
         });
       }
 
       // Load the favorite state of classes from localStorage
-      let storedClasses = localStorage.getItem("classfavs");
+      let storedClasses = localStorage.getItem("classes");
       if (storedClasses) {
         classes = JSON.parse(storedClasses);
       }
 
       // Call the update function to initially display the classes
       updateClasses();
+
+
 
 
 </script>
