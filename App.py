@@ -65,6 +65,10 @@ def Plan():
 def Grade():
     return render_template("grading.html")
 
+@app.route('/home')
+def Home():
+    return render_template("home.html")
+
 @app.route('/catalog')
 def Test():
     conn = get_db_connection()

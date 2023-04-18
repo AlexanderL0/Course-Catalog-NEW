@@ -35,6 +35,9 @@
   .favorited {
         color: gold;
       }
+  .button{
+    color: black;
+  }
 </style>
 
 <div class="container">
@@ -132,9 +135,9 @@
                               </script>
                               
                                 <td> 
-                                  <button class="favorite-button" onclick="favoriteClass('{{ lstCourse['name'] }}')" data-class-id="{{ lstCourse['name'] }}">
-                                  Favorite 
-                                  <i class="far fa-star"></i>
+                                  <button style="background-color: red" class="favorite-button" onclick="favoriteClass('{{ lstCourse['name'] }}','{{ lstCourse['subject'] }}','{{ lstCourse['course_id'] }}' )" data-class-id="{{ lstCourse['name'] }}">
+                                  <span class="fa fa-star">
+                                  </span>
                                 </button>
                                 </td>
                                 
@@ -308,15 +311,30 @@ function filterTable() {
 // Array to hold the favorited class names
 let favoriteClasses =[];
 favoriteClasses = JSON.parse(localStorage.getItem("favclasses"));
+
+let favoriteSubjects =[];
+favoriteSubjects= JSON.parse(localStorage.getItem("favsubjs"));
+
+let favoriteIDs =[];
+favoriteIDs= JSON.parse(localStorage.getItem("favids"));
+
 updateFavoritesList()
 
+
 // Function to handle the "favorite" button clicks
-function favoriteClass(className) {
+function favoriteClass(className, classSubj, classID) {
   favoriteClasses = JSON.parse(localStorage.getItem("favclasses"));
+  favoriteSubjects= JSON.parse(localStorage.getItem("favsubjs"));
+  favoriteIDs= JSON.parse(localStorage.getItem("favids"));
+  
   console.log(favoriteClasses);
+  console.log(favoriteSubjects);
+  console.log(favoriteIDs);
   // Check if the class has already been favorited
   if (favoriteClasses == null) {
     favoriteClasses =[className];
+    favoriteSubjects =[classSubj];
+    favoriteIDs =[classID];
     localStorage.setItem("favclasses", JSON.stringify(favoriteClasses));
 
   }
