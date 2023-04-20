@@ -135,7 +135,8 @@
                               </script>
                               
                                 <td> 
-                                  <button style="background-color: red" class="favorite-button" onclick="favoriteClass('{{ lstCourse['name'] }}','{{ lstCourse['subject'] }}','{{ lstCourse['course_id'] }}' )" data-class-id="{{ lstCourse['name'] }}">
+                                  <button style="background-color: red" class="favorite-button" onclick="favoriteClass('{{lstCourse['name']}}', '{{lstCourse['subject']}}', '{{lstCourse['course_id']}}')">
+
                                   <span class="fa fa-star">
                                   </span>
                                 </button>
@@ -328,21 +329,28 @@ function favoriteClass(className, classSubj, classID) {
   favoriteIDs= JSON.parse(localStorage.getItem("favids"));
   
   console.log(favoriteClasses);
+  console.log(classSubj)
   console.log(favoriteSubjects);
   console.log(favoriteIDs);
   // Check if the class has already been favorited
-  if (favoriteClasses == null) {
+  if (favoriteClasses == null || favoriteSubjects == null  || favoriteIDs == null) {
     favoriteClasses =[className];
     favoriteSubjects =[classSubj];
     favoriteIDs =[classID];
     localStorage.setItem("favclasses", JSON.stringify(favoriteClasses));
+    localStorage.setItem("favsubjs", JSON.stringify(favoriteSubjects));
+    localStorage.setItem("favids", JSON.stringify(favoriteIDs));
 
   }
   else if (!favoriteClasses.includes(className)) {
   // Add the class to the favorites array
     favoriteClasses.push(className);
+    favoriteSubjects.push(classSubj);
+    favoriteIDs.push(classID);
 
     localStorage.setItem("favclasses", JSON.stringify(favoriteClasses));
+    localStorage.setItem("favsubjs", JSON.stringify(favoriteSubjects));
+    localStorage.setItem("favids", JSON.stringify(favoriteIDs));
       
       // Update the list of favorited classes
     updateFavoritesList();   
@@ -358,8 +366,12 @@ function unfavoriteClass(className) {
   // If the class is found, remove it from the array
   if (index !== -1) {
     favoriteClasses.splice(index, 1);
+    favoriteSubjects.splice(index, 1);
+    favoriteIDs.splice(index, 1);
 
     localStorage.setItem("favclasses", JSON.stringify(favoriteClasses));
+    localStorage.setItem("favsubjs", JSON.stringify(favoriteSubjects));
+    localStorage.setItem("favids", JSON.stringify(favoriteIDs));
     
     // Update the list of favorited classes
     updateFavoritesList();
@@ -393,6 +405,8 @@ function updateFavoritesList() {
     
   });
   localStorage.setItem("favoriteClasses", JSON.stringify());
+  localStorage.setItem("favsubjs", JSON.stringify(favoriteSubjects));
+  localStorage.setItem("favids", JSON.stringify(favoriteIDs));
 
 }
       // Sample table of classes
