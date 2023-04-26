@@ -50,6 +50,7 @@
 }
 </style>
 <script>
+  
       updateFavoritesList();
       function updateFavoritesList() {
   // Get the favorite classes element from the DOM
@@ -79,8 +80,10 @@ let classNameHeader = row.insertCell();
 classNameHeader.innerText = "Class Name";
 let subjectHeader = row.insertCell();
 subjectHeader.innerText = "Subject";
+let idHeader = row.insertCell();
+idHeader.innerText = "ID";
 let unfavoriteHeader = row.insertCell();
-unfavoriteHeader.innerText = "ID";
+unfavoriteHeader.innerText = "Unfavorite Class";
 
 // Create the table body (empty for now)
 let tbody = table.createTBody();
@@ -107,14 +110,54 @@ favoriteClasses.forEach(className => {
   subjCell.appendChild(subjElement);
   
   
-  // Add a cell for the unfavorite button
-  let unfavoriteCell = row.insertCell();
+  // Add a cell for the ID
+  let idCell = row.insertCell();
   let idElement = document.createElement("p");
+
   idElement.innerText = favoriteIDs[i];
-  unfavoriteCell.appendChild(idElement);
+  idCell.appendChild(idElement);
   i++
+
+   // Add a cell for the unfavorite button
+  let unfavoriteCell = row.insertCell();
+  let unfavoriteButton = document.createElement("button");
+  unfavoriteButton.innerText = "Unfavorite";
+  unfavoriteButton.onclick = function() { unfavoriteClass(className); };
+  unfavoriteCell.appendChild(unfavoriteButton);
 });
 
+}
+
+function unfavoriteClass(className) {
+
+let favoriteClasses =[];
+//localStorage.setItem("favclasses", JSON.stringify(favoriteClasses));
+favoriteClasses = JSON.parse(localStorage.getItem("favclasses"));
+
+let favoriteSubjects =[];
+//localStorage.setItem("favsubjs", JSON.stringify(favoriteSubjects));
+favoriteSubjects= JSON.parse(localStorage.getItem("favsubjs"));
+
+let favoriteIDs =[];
+//localStorage.setItem("favids", JSON.stringify(favoriteIDs));
+favoriteIDs= JSON.parse(localStorage.getItem("favids"));
+  // Find the index of the class in the favorites array
+  
+  let index = favoriteClasses.indexOf(className);
+  
+  // If the class is found, remove it from the array
+  if (index !== -1) {
+    favoriteClasses.splice(index, 1);
+    favoriteSubjects.splice(index, 1);
+    favoriteIDs.splice(index, 1);
+
+    localStorage.setItem("favclasses", JSON.stringify(favoriteClasses));
+    localStorage.setItem("favsubjs", JSON.stringify(favoriteSubjects));
+    localStorage.setItem("favids", JSON.stringify(favoriteIDs));
+    
+    // Update the list of favorited classes
+    location.reload()
+  }
 }
 </script>
 

@@ -310,13 +310,21 @@ function filterTable() {
 }
 
 // Array to hold the favorited class names
+
+
+    
+    
+
 let favoriteClasses =[];
+//localStorage.setItem("favclasses", JSON.stringify(favoriteClasses));
 favoriteClasses = JSON.parse(localStorage.getItem("favclasses"));
 
 let favoriteSubjects =[];
+//localStorage.setItem("favsubjs", JSON.stringify(favoriteSubjects));
 favoriteSubjects= JSON.parse(localStorage.getItem("favsubjs"));
 
 let favoriteIDs =[];
+//localStorage.setItem("favids", JSON.stringify(favoriteIDs));
 favoriteIDs= JSON.parse(localStorage.getItem("favids"));
 
 updateFavoritesList()
@@ -329,7 +337,6 @@ function favoriteClass(className, classSubj, classID) {
   favoriteIDs= JSON.parse(localStorage.getItem("favids"));
   
   console.log(favoriteClasses);
-  console.log(classSubj)
   console.log(favoriteSubjects);
   console.log(favoriteIDs);
   // Check if the class has already been favorited
@@ -353,8 +360,13 @@ function favoriteClass(className, classSubj, classID) {
     localStorage.setItem("favids", JSON.stringify(favoriteIDs));
       
       // Update the list of favorited classes
+
+  
     updateFavoritesList();   
   }
+  console.log(favoriteClasses);
+  console.log(favoriteSubjects);
+  console.log(favoriteIDs);
 }
 
 // Function to handle the "unfavorite" button clicks
@@ -404,53 +416,11 @@ function updateFavoritesList() {
 
     
   });
-  localStorage.setItem("favoriteClasses", JSON.stringify());
+  localStorage.setItem("favclasses", JSON.stringify(favoriteClasses));
   localStorage.setItem("favsubjs", JSON.stringify(favoriteSubjects));
   localStorage.setItem("favids", JSON.stringify(favoriteIDs));
 
 }
-      // Sample table of classes
-      let classes = [
-        { name: "English 101", subject: "English", favorite: false },
-        { name: "Math 101", subject: "Math", favorite: false },
-        { name: "History 101", subject: "History", favorite: false },
-        { name: "Science 101", subject: "Science", favorite: false },
-        { name: "Art 101", subject: "Art", favorite: false }
-      ];
-
-      // Find the elements where we want to display the classes
-      let classesDiv = document.getElementById("classes");
-      // Function to update the display of the classes
-      function updateClasses() {
-        let table = "<table><tr><th>Name</th><th>Subject</th><th>Favorite</th></tr>";
-        for (let i = 0; i < classes.length; i++) {
-          let classObj = classes[i];
-          let star = classObj.favorite ? "<span class='fa fa-star favorited'></span>" : "<span class='fa fa-star'></span>";
-          table += "<tr><td>" + classObj.name + "</td><td>" + classObj.subject + "</td><td class='favorite'>" + star + "</td></tr>";
-        }
-        table += "</table>";
-        classesDiv.innerHTML = table;
-        // Add event listeners to the favorite stars in the table
-        let favoriteStars = document.querySelectorAll("#classes .favorite");
-        favoriteStars.forEach(function(star, index) {
-          star.addEventListener("click", function() {
-            classes[index].favorite = !classes[index].favorite;
-            localStorage.setItem("classes", JSON.stringify(classes));
-            updateClasses();
-          });
-        });
-      }
-
-      // Load the favorite state of classes from localStorage
-      let storedClasses = localStorage.getItem("classes");
-      if (storedClasses) {
-        classes = JSON.parse(storedClasses);
-      }
-
-      // Call the update function to initially display the classes
-      updateClasses();
-
-
 
 
 </script>
